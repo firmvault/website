@@ -9,6 +9,7 @@
   const composer = root.querySelector('.chat-compose-text');
   const person = root.querySelector('.chat-person');
   const progress = root.querySelector('.chat-progress span');
+  const date = root.querySelector('.chat-date');
   const chapters = [...root.querySelectorAll('[data-chat-chapter]')];
   const buttons = [...root.querySelectorAll('[data-chat-jump]')];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
@@ -46,6 +47,8 @@
     flow.element.style.transform = `translate3d(0,${-camera}px,0)`;
   }
   function render(value) {
+    // Move the date out of the way before messages reach the top edge.
+    date.style.opacity = 1 - smooth((value - 3) / 1.2);
     const handoff = smooth((value - 20.2) / 1.2);
     staff.style.opacity = 1 - handoff;
     partner.style.opacity = handoff;
