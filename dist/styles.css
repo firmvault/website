@@ -399,3 +399,13 @@ html[data-theme="dark"] #fv-hero .ha-brand-image{filter:invert(1)}
 @media(max-width:520px){#fv-hero .hero-grid{padding:34px 0 0;gap:30px}#fv-hero .hero-bottom{margin:24px auto 0}#fv-hero .hero-bottom-actions{width:100%;justify-content:space-between;gap:16px}#fv-hero .hero-actions .hero-primary{font-size:14px}#fv-hero .ha-art{max-width:100%}}
 @media(max-width:380px){#fv-hero .hero-copy h1{font-size:clamp(36px,11.8vw,44px)}#fv-hero .ha-wa-head strong{font-size:18px}#fv-hero .ha-msg{font-size:15px}#fv-hero .ha-dash-content{padding-inline:12px}#fv-hero .ha-dash-row{gap:6px;padding-inline:7px}#fv-hero .ha-file-state{font-size:10px}}
 @media(prefers-reduced-motion:reduce){#fv-hero .ha-wa-wrap,#fv-hero .ha-dashboard-wrap,#fv-hero .ha-flow,#fv-hero .ha-msg{will-change:auto}}
+
+/* User-supplied WhatsApp wallpapers follow the resolved site theme. */
+:root{--whatsapp-wallpaper:url('assets/whatsapp-chat-light.jpg')}
+:root[data-theme=dark]{--whatsapp-wallpaper:url('assets/whatsapp-chat-dark.jpg')}
+#fv-hero .ha-chat-body,.workflow-chat .chat-body{
+  background-image:var(--whatsapp-wallpaper);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}

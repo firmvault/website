@@ -1,0 +1,9 @@
+/* User-supplied WhatsApp wallpapers follow the resolved site theme. */
+:root{--whatsapp-wallpaper:url('assets/whatsapp-chat-light.jpg')}
+:root[data-theme=dark]{--whatsapp-wallpaper:url('assets/whatsapp-chat-dark.jpg')}
+#fv-hero .ha-chat-body,.workflow-chat .chat-body{
+  background-image:var(--whatsapp-wallpaper);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
