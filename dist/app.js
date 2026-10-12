@@ -27,80 +27,121 @@
   const steps = $$('[data-workflow-step]');
   const scene = $('.workflow-screen');
   const sceneButtons = $$('[data-scene-target]');
-  const statuses = { receive: 'Received', organise: 'Filed', pending: 'Pending', retrieve: 'Found' };
+  const pendingButton = $('[data-pending-preview]');
+  const desktopJourney = matchMedia('(min-width: 981px) and (min-height: 741px)');
+  let activeStep = 'receive';
+  const sceneLabels = { receive: 'Forward', organise: 'Organise', pending: 'Pending review', retrieve: 'Retrieve' };
+  const sceneStatuses = { receive: 'Received', organise: 'Filed', pending: 'Pending', retrieve: 'Found' };
+
   function setScene(value) {
-    if (!scene || scene.dataset.scene === value) return;
+    if (!scene || !sceneStatuses[value]) return;
     scene.dataset.scene = value;
-    $$('.scene-details', scene).forEach(detail => detail.setAttribute('aria-hidden', String(!detail.classList.contains(`scene-${value}`))));
+    $$('.scene-details', scene).forEach(detail => detail.setAttribute('aria-hidden', String(!detail.classList.contains('scene-' + value))));
     const index = steps.findIndex(step => step.dataset.workflowStep === value);
-    $('.scene-counter').textContent = `0${index + 1} / 04`;
-    $('.journey-status').textContent = statuses[value];
-    steps.forEach(step => step.classList.toggle('is-current', step.dataset.workflowStep === value));
+    $('.scene-counter', scene).textContent = value === 'pending' ? 'Review path' : '0' + (index + 1) + ' / 03';
+    $('.scene-caption-label', scene).textContent = sceneLabels[value];
+    const badge = $('.journey-status', scene);
+    badge.textContent = sceneStatuses[value];
+    badge.classList.toggle('status-pending', value === 'pending');
+    badge.classList.toggle('status-filed', value !== 'pending');
+    steps.forEach(step => step.classList.toggle('is-current', step.dataset.workflowStep === activeStep));
     sceneButtons.forEach(button => {
-      const active = button.dataset.sceneTarget === value;
+      const active = button.dataset.sceneTarget === (value === 'pending' ? 'organise' : value);
       button.classList.toggle('is-active', active);
       button.setAttribute('aria-pressed', String(active));
     });
+    pendingButton?.setAttribute('aria-pressed', String(value === 'pending'));
+    if (pendingButton) pendingButton.innerHTML = value === 'pending'
+      ? 'Back to the filing example <span aria-hidden="true">→</span>'
+      : 'See the Pending example <span aria-hidden="true">→</span>';
   }
   sceneButtons.forEach(button => button.addEventListener('click', () => {
     const step = steps.find(item => item.dataset.workflowStep === button.dataset.sceneTarget);
     if (!step) return;
-    const offset = innerWidth <= 760 ? $('.workflow-sticky').getBoundingClientRect().height + 100 : 145;
-    window.scrollTo({ top: step.getBoundingClientRect().top + scrollY - offset, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
-    setScene(button.dataset.sceneTarget);
+    activeStep = button.dataset.sceneTarget;
+    setScene(activeStep);
+    step.scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'start' });
   }));
+  pendingButton?.addEventListener('click', () => {
+    activeStep = 'organise';
+    setScene(scene.dataset.scene === 'pending' ? 'organise' : 'pending');
+  });
 
   const progress = $('.scroll-progress');
-  const scatter = $('.scatter-scene');
-  let ticking = false;
-  function onScroll() {
-    const height = document.documentElement.scrollHeight - innerHeight;
-    if (progress) progress.style.transform = `scaleX(${height > 0 ? Math.min(1, Math.max(0, scrollY / height)) : 0})`;
-    if (steps.length) {
-      const stickyBottom = $('.workflow-sticky').getBoundingClientRect().bottom;
-      const marker = innerWidth <= 760 ? Math.min(innerHeight - 40, Math.max(innerHeight * .65, stickyBottom + 85)) : innerHeight * .53;
-      let selected = steps[0];
-      let closest = Infinity;
-      steps.forEach(step => {
-        const rect = step.getBoundingClientRect();
-        const distance = Math.abs(rect.top + rect.height * .42 - marker);
-        if (distance < closest) { closest = distance; selected = step; }
-      });
-      setScene(selected.dataset.workflowStep);
+  let framePending = false;
+  function updateScroll() {
+    framePending = false;
+    if (progress && !reducedMotion.matches) {
+      const height = document.documentElement.scrollHeight - innerHeight;
+      progress.style.transform = 'scaleX(' + (height > 0 ? Math.min(1, Math.max(0, scrollY / height)) : 0) + ')';
     }
-    if (scatter && !reducedMotion.matches) {
-      const rect = scatter.getBoundingClientRect();
-      if (rect.top < innerHeight && rect.bottom > 0) {
-        const distance = (innerHeight / 2 - rect.top - rect.height / 2) / innerHeight;
-        scatter.style.setProperty('--scatter-offset', `${Math.max(-18, Math.min(18, distance * 45))}px`);
-      }
+    if (!steps.length || !desktopJourney.matches || reducedMotion.matches) return;
+    const bounds = $('.workflow-layout').getBoundingClientRect();
+    if (bounds.bottom < 0 || bounds.top > innerHeight) return;
+    const marker = innerHeight * .48;
+    let selected = steps[0];
+    for (const step of steps) {
+      if (step.getBoundingClientRect().top <= marker) selected = step;
     }
-    ticking = false;
+    if (selected.dataset.workflowStep !== activeStep) {
+      activeStep = selected.dataset.workflowStep;
+      setScene(activeStep);
+    }
   }
-  window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  onScroll();
+  function requestScrollUpdate() {
+    if (!framePending) { framePending = true; requestAnimationFrame(updateScroll); }
+  }
+  window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+  window.addEventListener('resize', requestScrollUpdate, { passive: true });
+  desktopJourney.addEventListener('change', requestScrollUpdate);
+  updateScroll();
 
   const art = $('.hero-art');
-  if (art && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+  function resetPointer() {
+    art?.style.setProperty('--pointer-x', '0px');
+    art?.style.setProperty('--pointer-y', '0px');
+  }
+  if (art) {
     art.addEventListener('pointermove', event => {
-      if (reducedMotion.matches) return;
+      if (reducedMotion.matches || !finePointer.matches) return;
       const bounds = art.getBoundingClientRect();
-      art.style.setProperty('--pointer-x', `${(event.clientX - bounds.left - bounds.width / 2) * .018}px`);
-      art.style.setProperty('--pointer-y', `${(event.clientY - bounds.top - bounds.height / 2) * .018}px`);
+      art.style.setProperty('--pointer-x', Math.max(-4, Math.min(4, (event.clientX - bounds.left - bounds.width / 2) * .012)) + 'px');
+      art.style.setProperty('--pointer-y', Math.max(-3, Math.min(3, (event.clientY - bounds.top - bounds.height / 2) * .012)) + 'px');
     });
-    art.addEventListener('pointerleave', () => { art.style.setProperty('--pointer-x', '0px'); art.style.setProperty('--pointer-y', '0px'); });
+    art.addEventListener('pointerleave', resetPointer);
+    finePointer.addEventListener('change', resetPointer);
   }
-  if ('IntersectionObserver' in window && !reducedMotion.matches) {
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
-    }), { threshold: .08, rootMargin: '0px 0px -25px 0px' });
-    document.body.classList.add('motion-ready');
-    $$('.reveal').forEach(element => observer.observe(element));
-    reducedMotion.addEventListener('change', event => {
-      if (event.matches) { document.body.classList.remove('motion-ready'); observer.disconnect(); }
-    });
+
+  let revealObserver;
+  if ('IntersectionObserver' in window) {
+    // Pause the only continuous cues when their region is off screen.
+    const motionObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      entry.target.classList.toggle('motion-paused', !entry.isIntersecting);
+    }), { threshold: 0 });
+    [art, scene].filter(Boolean).forEach(region => { region.classList.add('motion-paused'); motionObserver.observe(region); });
+    if (!reducedMotion.matches) {
+      revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); }
+      }), { threshold: .04 });
+      document.body.classList.add('motion-ready');
+      $$('.reveal').forEach(element => revealObserver.observe(element));
+    }
   }
+  function updateMotionPreference() {
+    resetPointer();
+    if (reducedMotion.matches) {
+      document.body.classList.remove('motion-ready');
+      revealObserver?.disconnect();
+    }
+    requestScrollUpdate();
+  }
+  reducedMotion.addEventListener('change', updateMotionPreference);
+  document.addEventListener('visibilitychange', () => {
+    document.body.classList.toggle('motion-paused', document.hidden);
+    if (!document.hidden) requestScrollUpdate();
+  });
+  document.body.classList.toggle('motion-paused', document.hidden);
 
   const rows = $$('.vault-row');
   const search = $('#preview-search');
@@ -122,6 +163,17 @@
     $$('[data-filter]').forEach(tab => { const active = tab === button; tab.classList.toggle('is-active', active); tab.setAttribute('aria-pressed', String(active)); });
     filterRows();
   }));
+  $('[data-clear-search]')?.addEventListener('click', () => {
+    if (search) search.value = '';
+    filter = 'all';
+    $('[data-filter]').forEach(button => {
+      const active = button.dataset.filter === 'all';
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+    filterRows();
+    search?.focus();
+  });
   const examples = [
     { filename: 'GST_Return_Sep_2026.pdf', client: 'Aarav Enterprises', service: 'GST', type: 'Return', period: 'September 2026', status: 'Filed' },
     { filename: 'Bank_Statement_Q2.pdf', client: 'Mehta & Co.', service: 'Accounting', type: 'Not yet classified', period: 'Q2 2026–27', status: 'Pending' },

@@ -20,13 +20,22 @@ Open the printed local URL. The server binds to 127.0.0.1. Set PORT if 4173 is u
 
 ## Editing
 
-- Page copy, navigation, shared layout, and metadata: `scripts/render.mjs`. Run it after edits to regenerate the tracked HTML pages.
-- Layout, theme tokens, responsive behavior, and animation: `dist/styles.css`.
+- Homepage story, illustrative scenes, and example vault: `scripts/home.mjs`.
+- Supporting page copy, navigation, shared layout, and metadata: `scripts/render.mjs`. Run `npm run build` after edits to regenerate the tracked HTML pages.
+- Layout, theme tokens, responsive behavior, and animation: `scripts/styles.css`. The build copies it into `dist/styles.css`; edit the source stylesheet.
 - Interaction behavior and enquiry preparation: `dist/app.js`.
 - Theme boot, saved preference, and OS appearance changes: `dist/theme.js`.
 - Brand files and licensed fonts: `dist/assets/`.
 
 The default theme is System. Explicit choices are remembered with the browser-local `firmvault-theme` key. OS appearance changes update the page while System is selected. Reduced motion disables decorative animations, parallax, reveal movement, and smooth scrolling; the workflow text remains available.
+
+## Product story and visual refinement
+
+The homepage follows one fictional GST return through employee forwarding, filing, and retrieval. Pending is a conditional review path attached to filing, with an optional desktop scene. The example vault is a separate interactive website demonstration with search, a Pending filter, document details, and a clear-search action.
+
+On larger screens with enough viewport height, the narrative controls a steady scene panel. Tablets, phones, short screens, and reduced-motion users receive stacked steps with inline examples. Continuous cues pause when off screen or when the tab is hidden. Pointer response moves only the incoming cue; interactive document controls stay steady.
+
+Real product screenshots and approved customer feedback have not been supplied. All concept visuals remain labelled, and no testimonials or unverified product claims are added. See `docs/PRODUCT-STORY-VISUAL-REFINEMENT.md` for this iteration's delivery notes and evidence requirements.
 
 ## Demo enquiries
 

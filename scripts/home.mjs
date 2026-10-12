@@ -1,0 +1,141 @@
+// Marketing story. All interface records are fictional demonstration content.
+export function renderHome(icon, arrow, rows) {
+  const file = 'GST_Return_Sep_2026.pdf';
+  const fields = `<dl class="filing-fields"><div><dt>Client</dt><dd>Aarav Enterprises</dd></div><div><dt>Service</dt><dd>GST</dd></div><div><dt>Document type</dt><dd>Return</dd></div><div><dt>Period</dt><dd>September 2026</dd></div></dl>`;
+  const fileCard = `<div class="example-file"><span class="pdf-icon">PDF</span><div><strong>${file}</strong><span>Fictional demonstration document</span></div></div>`;
+  return `
+<main id="main">
+  <section class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> Document management for professional firms</p>
+        <h1><span>Your firm’s</span> <span>documents.</span> <span class="accent hero-order">In order.<svg viewBox="0 0 420 25" preserveAspectRatio="none" aria-hidden="true"><path d="M4 18Q190 0 414 11"/></svg></span></h1>
+        <p class="hero-description">Employees forward documents to FirmVault’s WhatsApp number. Your team organises them by client, service, document type, and period, then finds them in one central vault.</p>
+        <div class="hero-actions"><a class="button" href="/book-demo/">Book a demo ${arrow}</a><a class="text-link" href="#how-it-works">See how it works ${icon('arrow')}</a></div>
+        <p class="hero-audience">For CA firms, tax consultants, and law firms.</p>
+      </div>
+      <figure class="hero-art" aria-label="Illustrative document forwarding and filing example">
+        <div class="hero-motif" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="incoming-file decorative-drift"><span class="channel-icon">${icon('chat')}</span><div><span class="mini-label">The familiar way in</span><strong>Forwarded through WhatsApp</strong></div><span class="incoming-check" aria-hidden="true">${icon('check')}</span></div>
+        <div class="route-line" aria-hidden="true"><span></span></div>
+        <div class="hero-workspace">
+          <div class="preview-chrome"><span class="live-dot"></span><span>FirmVault / Document vault</span><span class="preview-pill">Illustrative</span></div>
+          <div class="hero-workspace-body"><div class="workspace-title"><span class="mini-label">A place for this document</span>${icon('folder')}</div>${fileCard}${fields}<div class="workspace-result"><span class="status status-filed">${icon('check')} Filed</span><span>Its context stays with it.</span></div></div>
+        </div>
+        <figcaption class="art-caption">Forward → organise → retrieve.<br>Illustrative interface with fictional records.</figcaption>
+      </figure>
+    </div>
+    <div class="container hero-bottom"><p>A familiar channel.<br><strong>A consistent place to look.</strong></p><a href="#the-problem" class="scroll-cue">Follow the document ${icon('arrow')}</a></div>
+  </section>
+
+  <section class="problem-section section-space" id="the-problem">
+    <div class="container problem-grid">
+      <div class="reveal"><p class="eyebrow"><span class="section-number">01</span> A familiar working day</p><h2>The file arrived.<br><span class="muted-heading">Finding it is<br>another task.</span></h2><p class="section-description">Documents travel through conversations. Your team needs a consistent place to find them when the next piece of work begins.</p></div>
+      <div class="problem-list">
+        <article class="problem-item reveal"><span class="problem-icon">${icon('chat')}</span><div><span class="mini-label">Across conversations</span><h3>“Which chat was it in?”</h3><p>A client sends a file. A different employee needs it later.</p></div></article>
+        <article class="problem-item reveal"><span class="problem-icon">${icon('file')}</span><div><span class="mini-label">Without the context</span><h3>“Which client and period?”</h3><p>A filename alone may not explain where a document belongs.</p></div></article>
+        <article class="problem-item reveal"><span class="problem-icon">${icon('folder')}</span><div><span class="mini-label">When work resumes</span><h3>“Where should I look?”</h3><p>The team needs one place to search previously received records.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="workflow-section section-space" id="how-it-works">
+    <div class="container">
+      <div class="section-heading reveal"><p class="eyebrow"><span class="section-number">02</span> One document. A clear journey.</p><h2>From a conversation<br><span class="muted-heading">to a useful record.</span></h2><p class="section-description">Follow a fictional GST return through collection, filing, and retrieval. If filing details need review, Pending provides the next step.</p></div>
+      <div class="workflow-layout">
+        <div class="workflow-narrative">
+          <article class="workflow-step is-current" id="step-receive" data-workflow-step="receive">
+            <span class="step-count">01 / Forward</span><h3>Start with a familiar action.</h3><p>An employee forwards the document to FirmVault’s WhatsApp number. That file becomes part of the firm’s document workflow.</p>
+            <div class="step-example"><span class="mobile-example-label">Illustrative example</span><div class="mobile-forward">${icon('chat')}<span>Employee → FirmVault</span></div>${fileCard}</div>
+          </article>
+          <article class="workflow-step" id="step-organise" data-workflow-step="organise">
+            <span class="step-count">02 / Organise</span><h3>Give the file its context.</h3><p>File the GST return under its client, service, document type, and period. Those four details connect the document to the work.</p>
+            <div class="step-example"><span class="mobile-example-label">Illustrative filing details</span>${fields}</div>
+            <aside class="pending-note"><span class="pending-icon">${icon('clock')}</span><div><span class="mini-label">When details need review</span><h4>Unclassified? Review in Pending.</h4><p>Pending holds unclassified documents for review. It is a conditional path, rather than a step every file passes through.</p><button type="button" class="text-link pending-example-button" data-pending-preview aria-pressed="false">See the Pending example ${icon('arrow')}</button></div></aside>
+          </article>
+          <article class="workflow-step" id="step-retrieve" data-workflow-step="retrieve">
+            <span class="step-count">03 / Retrieve</span><h3>Find the record. Continue the work.</h3><p>Search the central vault and retrieve the document you need, with its client and filing details alongside it.</p>
+            <div class="step-example"><span class="mobile-example-label">Illustrative retrieval</span><div class="scene-search">${icon('search')}<span>Aarav Enterprises</span></div>${fileCard}<span class="status status-filed">${icon('check')} Record found</span></div>
+          </article>
+        </div>
+        <div class="workflow-sticky">
+          <div class="workflow-screen" data-scene="receive">
+            <div class="workflow-screen-top"><span class="live-dot"></span><span>The document journey</span><span class="scene-counter">01 / 03</span></div>
+            <div class="journey-stage">
+              <div class="journey-document">${fileCard}<span class="journey-status status status-filed">Received</span></div>
+              <div class="scene-details scene-receive" aria-hidden="false"><div class="scene-channel">${icon('chat')}<span>Employee<span class="channel-arrow">→</span>FirmVault</span></div><h4>A familiar way in.</h4><p>Forwarded through WhatsApp.<br>Ready for its filing context.</p><div class="scene-route" aria-hidden="true"><i></i><span></span><i></i></div></div>
+              <div class="scene-details scene-organise" aria-hidden="true"><p class="mini-label">Four details. One useful record.</p>${fields}<p class="scene-footnote">Client · Service · Document type · Period</p></div>
+              <div class="scene-details scene-pending" aria-hidden="true"><span class="pending-scene-icon">${icon('clock')}</span><h4>A place for the next action.</h4><p>This example still needs filing details.<br>Review it in Pending.</p><div class="pending-field"><span>Client</span><strong>Needs review</strong></div><span class="status status-pending">${icon('clock')} Pending</span></div>
+              <div class="scene-details scene-retrieve" aria-hidden="true"><div class="scene-search">${icon('search')}<span>Aarav Enterprises</span></div><div class="retrieved-result">${icon('check')}<div><strong>${file}</strong><span>GST · Return · September 2026</span></div></div><h4>The record, with its context.</h4><p>A central place to search and retrieve.</p></div>
+            </div>
+            <div class="scene-caption"><span>Illustrative workflow · fictional data</span><span class="scene-caption-label">Forward</span></div>
+          </div>
+          <div class="journey-nav" role="group" aria-label="Explore document journey"><button class="is-active" type="button" data-scene-target="receive" aria-pressed="true"><span>01</span> Forward</button><button type="button" data-scene-target="organise" aria-pressed="false"><span>02</span> Organise</button><button type="button" data-scene-target="retrieve" aria-pressed="false"><span>03</span> Retrieve</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="inside-section section-space" id="inside-the-vault">
+    <div class="container">
+      <div class="section-heading reveal"><p class="eyebrow"><span class="section-number">03</span> Inside the vault</p><h2>The document is only<br><span class="muted-heading">part of the picture.</span></h2><p class="section-description">See how filing context, Pending, and search fit together. This interactive example uses fictional records to explain the workflow.</p></div>
+      <div class="inside-layout">
+        <div class="vault-preview reveal">
+          <div class="preview-chrome"><span class="live-dot"></span><span>FirmVault / Example workspace</span><span class="preview-pill">Illustrative</span></div>
+          <div class="vault-content">
+            <div class="vault-heading"><div><span class="mini-label">Try the example</span><h3>Document vault</h3></div><span class="workspace-icon">${icon('folder')}</span></div>
+            <div class="preview-search">${icon('search')}<label class="sr-only" for="preview-search">Search example documents</label><input type="search" id="preview-search" placeholder="Search a client, filename, or period" autocomplete="off"><span class="search-hint" aria-hidden="true">Search</span></div>
+            <div class="preview-tabs" role="group" aria-label="Filter example documents"><button class="is-active" type="button" data-filter="all" aria-pressed="true">All documents <span>3</span></button><button type="button" data-filter="pending" aria-pressed="false">Pending <span>1</span></button></div>
+            <div class="vault-table-header" aria-hidden="true"><span>Document / Client</span><span>Period</span><span>Status</span></div>
+            <div class="vault-rows">${rows}<div class="preview-empty" hidden>${icon('search')}<p>No example documents match.</p><button type="button" class="text-link" data-clear-search>Clear search and filters ${icon('arrow')}</button></div></div>
+            <div class="vault-preview-bottom"><span>Open a row to see its filing details.</span><span class="preview-count" aria-live="polite">3 example documents</span></div>
+          </div>
+        </div>
+        <div class="inside-notes">
+          <article class="inside-note reveal"><span class="note-number">01</span><div><h3>The right context.</h3><p>Open a document to see its client, service, document type, and period together.</p></div></article>
+          <article class="inside-note reveal"><span class="note-number">02</span><div><h3>Pending, in view.</h3><p>Select Pending to explore an example that still needs its document type reviewed.</p></div></article>
+          <article class="inside-note reveal"><span class="note-number">03</span><div><h3>A place to find it.</h3><p>Try searching “Aarav” or “Sep” in this example. The matching records stay in view.</p></div></article>
+          <p class="example-disclosure">This is a website demonstration, not a live product workspace. No client files are uploaded or stored here.</p>
+        </div>
+      </div>
+      <div class="context-grid">
+        <article class="context-item reveal"><span class="context-number">01 / Client</span><h3>Who it belongs to.</h3><p>Keep the document connected to the right client.</p></article>
+        <article class="context-item reveal"><span class="context-number">02 / Service</span><h3>What the work is.</h3><p>Give the file its service context, such as GST or audit.</p></article>
+        <article class="context-item reveal"><span class="context-number">03 / Document type</span><h3>What it contains.</h3><p>Distinguish a return, statement, or other document type.</p></article>
+        <article class="context-item reveal"><span class="context-number">04 / Period</span><h3>When it’s relevant.</h3><p>Keep the month, quarter, or financial year alongside it.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="firms-section section-space" id="for-your-firm">
+    <div class="container firms-layout">
+      <div class="firms-heading reveal"><p class="eyebrow"><span class="section-number">04</span> For your kind of work</p><h2>Client documents.<br><span class="muted-heading">Professional context.</span></h2><p class="section-description">The filing structure reflects the client, service, document type, and period your team works with.</p><a class="text-link" href="/book-demo/">Discuss your firm’s workflow ${icon('arrow')}</a></div>
+      <div class="firm-list">
+        <article class="firm-item reveal"><span class="firm-index">01</span><div><h3>CA firms</h3><p>Bring tax and audit records into a central vault, with the client and period alongside each document.</p><div class="firm-tags"><span>GST returns</span><span>Audit records</span><span>KYC documents</span></div></div></article>
+        <article class="firm-item reveal"><span class="firm-index">02</span><div><h3>Tax consultants</h3><p>Give returns and supporting client documents a consistent place in your filing process.</p><div class="firm-tags"><span>Tax returns</span><span>Supporting documents</span></div></div></article>
+        <article class="firm-item reveal"><span class="firm-index">03</span><div><h3>Law firms</h3><p>Keep agreements, notices, and other client documents connected to their filing details in one central place.</p><div class="firm-tags"><span>Agreements</span><span>Notices</span><span>Client records</span></div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section section-space" id="questions">
+    <div class="container faq-layout">
+      <div class="reveal"><p class="eyebrow"><span class="section-number">05</span> Before your demo</p><h2>Good questions.<br><span class="muted-heading">Clear next steps.</span></h2><p class="section-description">Tell us how your firm handles documents today. We’ll use that workflow as the starting point.</p><a class="text-link" href="mailto:contact@nexosk.in">Get in touch ${arrow}</a></div>
+      <div class="faq-list reveal">
+        <details><summary>Who forwards documents to FirmVault?<span class="faq-plus" aria-hidden="true"></span></summary><p>Employees forward documents to FirmVault’s WhatsApp number. That product intake channel is separate from the sales email used to arrange a demo.</p></details>
+        <details><summary>How are documents filed?<span class="faq-plus" aria-hidden="true"></span></summary><p>Documents are organised by client, service, document type, and period. During the demo, we’ll show how filing details are assigned in the product and discuss how that fits your team’s process.</p></details>
+        <details><summary>Does every document go through Pending?<span class="faq-plus" aria-hidden="true"></span></summary><p>No. Pending is for unclassified documents that need their filing details reviewed. It is a conditional review path, not a missing-document tracker.</p></details>
+        <details><summary>What will we see during the demo?<span class="faq-plus" aria-hidden="true"></span></summary><p>We’ll walk through employee forwarding, the four filing details, Pending review, and central search and retrieval, using your firm’s current process to guide the conversation.</p></details>
+        <details><summary>Can we discuss our team’s requirements?<span class="faq-plus" aria-hidden="true"></span></summary><p>Yes. Bring questions about file types, search, team access, onboarding, and support. We’ll discuss the product’s current capabilities and the arrangements your firm needs.</p></details>
+        <details><summary>Are these screenshots of the live product?<span class="faq-plus" aria-hidden="true"></span></summary><p>No. The visuals and interactive vault are illustrative website examples with fictional records. They explain the document workflow; a demo is the next step to see the actual product.</p></details>
+        <details><summary>What happens when I request a demo?<span class="faq-plus" aria-hidden="true"></span></summary><p>The demo page prepares an email to contact@nexosk.in. You send it from your email app, and our team coordinates a time with you. Preparing the message does not reserve an appointment.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing-section">
+    <div class="container closing-inner"><div class="closing-motif" aria-hidden="true"><i></i><i></i><i></i></div><div class="closing-copy reveal"><p class="eyebrow">Start with your firm’s workflow</p><h2>See the journey.<br>Picture your firm.</h2><p>Walk through collection, filing, Pending review, and retrieval. Talk through the document process your team needs.</p><a class="button button-white" href="/book-demo/">Book a demo ${arrow}</a><span class="closing-note">A demo enquiry. A conversation about your practice.</span></div><div class="closing-bottom"><span>Your firm’s documents. In order.</span><span>FirmVault</span></div></div>
+  </section>
+</main>
+<dialog class="document-dialog" id="document-dialog" aria-labelledby="document-dialog-title"><button class="dialog-close icon-button" type="button" aria-label="Close document details">${icon('close')}</button><p class="eyebrow">Illustrative document details</p><h2 id="document-dialog-title"></h2><div class="dialog-fields"></div><p class="small-print">Fictional example, shown to explain filing context. No real file is uploaded or stored in this preview.</p><button class="button dialog-done" type="button">Got it ${icon('check')}</button></dialog>`;
+}
