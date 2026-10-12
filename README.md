@@ -37,3 +37,12 @@ The About, Privacy, and Website Terms pages cover the supplied company attributi
 ## Deployment
 
 The tracked `.openai/hosting.json` binds this checkout to its private ChatGPT Site and deploys `dist/`. Use the Sites plugin source workflow to synchronize and publish the exact source version. Keep private access until the owner requests a change.
+
+On Windows, run the Site source workflow with Git Bash first on PATH and TAR_OPTIONS set to `--force-local`. This avoids the WSL path interpretation and GNU tar treating a drive-letter archive path as a remote hostname.
+
+```powershell
+$env:PATH = 'C:\Program Files\Git\bin;' + $env:PATH
+$env:TAR_OPTIONS = '--force-local'
+```
+
+The tracked PNG sharing image is generated from `dist/assets/social-cover.svg`, which uses the approved outlined logo. Regeneration requires Sharp; `scripts/render-cover.mjs` accepts a FIRMVAULT_SHARP_PATH environment variable when using the bundled runtime.

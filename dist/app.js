@@ -31,6 +31,7 @@
   function setScene(value) {
     if (!scene || scene.dataset.scene === value) return;
     scene.dataset.scene = value;
+    $$('.scene-details', scene).forEach(detail => detail.setAttribute('aria-hidden', String(!detail.classList.contains(`scene-${value}`))));
     const index = steps.findIndex(step => step.dataset.workflowStep === value);
     $('.scene-counter').textContent = `0${index + 1} / 04`;
     $('.journey-status').textContent = statuses[value];

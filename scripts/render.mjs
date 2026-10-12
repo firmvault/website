@@ -61,9 +61,10 @@ const pages = [
 for (const [slug, title, description, content] of pages) {
   const canonical = origin + '/' + (slug && slug !== '404' ? slug + '/' : '');
   const html = `<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f7f5ef"><title>${title}</title><meta name="description" content="${description}">${slug === '404' ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${canonical}">`}<meta property="og:type" content="website"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${origin}/assets/social-cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/assets/symbol.svg" type="image/svg+xml"><script src="/theme.js"></script><link rel="preload" href="/assets/heading.woff" as="font" type="font/woff" crossorigin><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script></head><body>${header(!slug)}${content}${footer}</body></html>`;
+  const output = html.replace('need<br>for order.', 'need<br> for order.').replace('scene-details scene-receive"', 'scene-details scene-receive" aria-hidden="false"').replace(/scene-details scene-(organise|pending|retrieve)"/g, 'scene-details scene-$1" aria-hidden="true"');
   const directory = slug && slug !== '404' ? `dist/${slug}` : 'dist';
   await mkdir(directory, { recursive: true });
-  await writeFile(`${directory}/${slug === '404' ? '404.html' : 'index.html'}`, html);
+  await writeFile(`${directory}/${slug === '404' ? '404.html' : 'index.html'}`, output);
 }
 await writeFile('dist/robots.txt', `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
 await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.filter(([slug]) => slug !== '404').map(([slug]) => `<url><loc>${origin}/${slug ? slug + '/' : ''}</loc></url>`).join('')}</urlset>`);
