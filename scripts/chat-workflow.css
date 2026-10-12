@@ -1,0 +1,90 @@
+/* The approved chat is drawn as live interface elements, so every frame stays sharp. */
+.chat-workflow{padding:120px 0 64px;background:var(--surface-alt);border-block:1px solid var(--border);--chat-top:108px;--chat-available:640px;--chat-travel:2400px}
+.chat-workflow .workflow-intro{margin-bottom:54px}
+.chat-scroll-stage{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:80px;align-items:center}
+.chat-story{min-width:0}
+.chat-story-step{padding:22px 0}
+.chat-story-step h3{font-size:clamp(38px,4.6vw,64px);font-weight:500;line-height:1.1}
+.chat-story-step>p:not(.chat-step-count){font-size:20px;color:var(--muted);line-height:1.6;max-width:360px;margin-top:22px}
+.chat-step-count{font:500 11px/1.4 'IBM Plex Mono',monospace;color:var(--accent);margin-bottom:18px}
+.chat-step-count span{color:var(--muted);margin-left:6px;font-size:9px}
+.chat-step-note{display:block;font:500 9px/1.6 'IBM Plex Mono',monospace;letter-spacing:.05em;color:var(--muted);margin-top:24px}
+.chat-story-demo{margin-top:24px;font-size:15px}
+.workflow-chat{--chat-bg:#efeee7;--chat-in:var(--surface);--chat-out:#dcf0df;--chat-green:#146c3a;--chat-ink:var(--text);--chat-muted:var(--muted);min-width:0;width:100%;max-width:620px;justify-self:end;font:400 19px/1.35 'Source Sans 3',sans-serif}
+[data-theme=dark] .workflow-chat{--chat-bg:#121a20;--chat-in:#263036;--chat-out:#203e30;--chat-green:#91dfb3}
+.workflow-chat .chat-window{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.workflow-chat .chat-header{display:flex;align-items:center;gap:13px;padding:18px 24px;min-height:82px;border-bottom:1px solid var(--border);background:var(--surface);z-index:2;position:relative}
+.workflow-chat .chat-avatar{width:43px;height:43px;display:grid;place-items:center;background:var(--bg);border-radius:50%;flex:none}
+.workflow-chat .chat-avatar img{width:24px;height:25px}
+[data-theme=dark] .workflow-chat .chat-avatar img{filter:invert(1)}
+.workflow-chat .chat-header strong{display:block;font:600 22px/1.2 'Space Grotesk',sans-serif;letter-spacing:-.04em}
+.workflow-chat .chat-person{display:block;font-size:14px;color:var(--chat-muted);margin-top:3px}
+.workflow-chat .chat-online{margin-left:auto;background:var(--chat-green);width:7px;height:7px;border-radius:50%;flex:none}
+.workflow-chat .chat-body{background:var(--chat-bg);position:relative;flex:1;min-height:0}
+.workflow-chat .chat-date{display:none}
+.workflow-chat .chat-flow{padding:20px;display:flex;flex-direction:column;gap:11px}
+.workflow-chat .chat-message{display:none;border:1px solid color-mix(in srgb,var(--border) 60%,transparent);padding:11px 14px 7px;border-radius:12px;background:var(--chat-in);max-width:88%;align-self:flex-start;min-width:135px;transform-origin:bottom left}
+.workflow-chat .chat-message.fallback-keep{display:block}
+.workflow-chat .chat-message.out{align-self:flex-end;background:var(--chat-out);border-bottom-right-radius:3px;transform-origin:bottom right}
+.workflow-chat .chat-message.in{border-bottom-left-radius:3px}
+.workflow-chat .chat-message p{margin:0;overflow-wrap:anywhere}
+.workflow-chat .chat-message-meta{display:flex;gap:6px;align-items:center;justify-content:flex-end;color:var(--chat-muted);font-size:11px;margin-top:5px}
+.workflow-chat .chat-delivered{color:var(--chat-green);font-weight:600}
+.workflow-chat .chat-file{width:min(100%,340px);min-width:0}
+.workflow-chat .chat-forwarded{font-size:12px;font-style:italic;color:var(--chat-muted);margin-bottom:9px}
+.workflow-chat .chat-file-inner{display:flex;align-items:center;gap:12px;background:color-mix(in srgb,var(--surface) 45%,transparent);padding:12px;border-radius:7px}
+.workflow-chat .chat-pdf{font-weight:600;font-size:11px;display:grid;place-items:center;width:38px;height:46px;flex:none;background:var(--surface);border:1px solid var(--border);border-radius:4px;color:var(--chat-green)}
+.workflow-chat .chat-file-inner>div{min-width:0}
+.workflow-chat .chat-file-inner strong{font-size:17px;overflow-wrap:anywhere;display:block;line-height:1.3}
+.workflow-chat .chat-file-inner>div>span{display:block;font-size:13px;color:var(--chat-muted);margin-top:3px}
+.workflow-chat .chat-choice{display:inline-block;font-size:14px;padding:7px 12px;margin-top:9px;color:var(--chat-green);border:1px solid color-mix(in srgb,var(--chat-green) 40%,transparent);background:var(--surface);border-radius:7px}
+.workflow-chat .chat-confirmation{color:var(--chat-green);display:flex;align-items:flex-start;gap:7px;font-weight:600}
+.workflow-chat .chat-record{width:100%;max-width:360px}
+.workflow-chat .chat-record-label{display:block;color:var(--chat-muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.workflow-chat .chat-record-name{font-size:17px;overflow-wrap:anywhere}
+.workflow-chat dl{margin:13px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:13px 16px}
+.workflow-chat dl div{min-width:0}
+.workflow-chat dt{font-size:11px;color:var(--chat-muted);margin-bottom:3px}
+.workflow-chat dd{margin:0;font-size:16px;line-height:1.35}
+.workflow-chat .chat-message p.chat-receipt{margin-top:15px;padding-top:11px;border-top:1px solid var(--border);color:var(--chat-green);font-size:13px}
+.workflow-chat .chat-composer{min-height:62px;padding:11px 20px;display:flex;align-items:center;gap:13px;background:var(--surface);border-top:1px solid var(--border);position:relative;z-index:2;color:var(--chat-muted)}
+.workflow-chat .chat-plus{font-size:24px;font-weight:400;line-height:1}
+.workflow-chat .chat-compose-text{flex:1;font-size:16px;min-width:0;overflow-wrap:anywhere;line-height:1.35}
+.workflow-chat .chat-send{display:grid;place-items:center;background:var(--chat-green);color:var(--surface);border-radius:50%;height:34px;width:34px;flex:none}
+.workflow-chat .chat-send .icon{width:18px;height:18px;transform:rotate(-45deg)}
+.workflow-chat .chat-typing{align-items:center;gap:4px;min-width:55px;width:55px;padding:14px}
+.workflow-chat .chat-typing span{width:5px;height:5px;border-radius:50%;background:var(--chat-muted)}
+.workflow-chat .chat-partner-divider{display:block;text-align:center;font-size:12px;color:var(--chat-muted);padding:12px 20px}
+.chat-caption{display:flex;justify-content:space-between;gap:12px;font-size:11px;line-height:1.4;color:var(--muted);margin-top:14px}
+.chat-scroll-cue{display:none;white-space:nowrap}
+.chat-chapter-nav{display:none;gap:8px;margin-top:14px;justify-content:space-between}
+.chat-chapter-nav button{display:flex;align-items:center;gap:7px;font-size:13px;background:transparent;border:0;border-bottom:2px solid transparent;padding:9px 0;color:var(--muted);min-height:42px;transition:color .15s}
+.chat-chapter-nav button span{font:500 9px 'IBM Plex Mono',monospace;color:var(--muted-heading)}
+.chat-chapter-nav button[aria-pressed=true]{color:var(--text);border-bottom-color:var(--accent)}
+.chat-chapter-nav button:hover{color:var(--text)}
+.chat-progress{display:none;height:2px;background:color-mix(in srgb,var(--text) 8%,transparent);margin-top:3px}
+.chat-progress span{display:block;width:100%;height:100%;background:var(--accent);transform:scaleX(0);transform-origin:left}
+/* Enhancement is applied only when there is room for the pinned experience. */
+.chat-enhanced .chat-scroll-track{height:calc(var(--chat-available) + var(--chat-travel));position:relative}
+.chat-enhanced .chat-scroll-stage{height:var(--chat-available);position:sticky;top:var(--chat-top)}
+.chat-enhanced .chat-story-segments{position:relative;height:340px}
+.chat-enhanced .chat-story-step{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0;opacity:0;pointer-events:none}
+.chat-enhanced .chat-story-step[data-chat-chapter="0"]{opacity:1}
+.chat-enhanced .chat-story-step.is-current{pointer-events:auto}
+.chat-enhanced .chat-story-demo{margin-top:16px}
+.chat-enhanced .chat-window{height:min(600px,calc(var(--chat-available) - 110px))}
+.chat-enhanced .chat-body{overflow:hidden}
+.chat-enhanced .chat-date{display:block;position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:2;font-size:11px;padding:4px 10px;border-radius:5px;color:var(--chat-muted);background:var(--bg)}
+.chat-enhanced .chat-flow{position:absolute;left:24px;right:24px;top:47px;padding:0}
+.chat-enhanced .chat-message{display:block}
+.chat-enhanced .chat-message.chat-typing{display:flex}
+.chat-enhanced .chat-partner{opacity:0}
+.chat-enhanced .chat-partner-divider{display:none}
+.chat-enhanced .chat-chapter-nav{display:flex}
+.chat-enhanced .chat-scroll-cue,.chat-enhanced .chat-progress{display:block}
+.chat-enhanced.chat-in-view .chat-flow,.chat-enhanced.chat-in-view .chat-message{will-change:transform,opacity}
+@media(max-width:1190px){.chat-scroll-stage{gap:48px;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}}
+@media(max-width:980px){.chat-scroll-stage{gap:30px;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr)}.chat-story-step>p:not(.chat-step-count){font-size:18px}.workflow-chat .chat-flow{left:18px;right:18px}.workflow-chat{font-size:18px}.chat-caption{font-size:10px}.chat-chapter-nav button{font-size:12px;gap:5px}}
+@media(max-width:760px){.chat-workflow{padding:78px 0 34px}.chat-workflow .workflow-intro{margin-bottom:30px}.chat-scroll-stage{grid-template-columns:1fr;gap:28px}.workflow-chat{max-width:560px;justify-self:center;font-size:17px}.chat-story-step h3{font-size:32px}.chat-story-step>p:not(.chat-step-count){font-size:16px;line-height:1.5;max-width:520px;margin-top:10px}.chat-step-count{font-size:9px;margin-bottom:8px}.chat-step-note{margin-top:12px;font-size:8px}.chat-story-demo{font-size:14px;margin-top:8px}.chat-enhanced .chat-story-segments{height:126px}.chat-enhanced .chat-story-step{justify-content:center}.chat-enhanced .chat-step-note,.chat-enhanced .chat-story-demo{display:none}.chat-enhanced .chat-scroll-stage{align-content:center;gap:16px}.chat-enhanced .chat-window{height:min(560px,calc(var(--chat-available) - 230px));min-height:280px}.workflow-chat .chat-header{padding:13px 17px;min-height:70px;gap:10px}.workflow-chat .chat-header strong{font-size:21px}.workflow-chat .chat-person{font-size:12px}.workflow-chat .chat-avatar{width:37px;height:37px}.workflow-chat .chat-flow{left:14px;right:14px;gap:9px}.workflow-chat .chat-message{padding:10px 12px 6px;max-width:94%}.workflow-chat .chat-file-inner{padding:9px;gap:9px}.workflow-chat .chat-file-inner strong,.workflow-chat .chat-record-name{font-size:15px}.workflow-chat .chat-choice{font-size:13px;padding:6px 10px}.workflow-chat .chat-record-label{font-size:10px}.workflow-chat .chat-composer{min-height:51px;padding:8px 14px}.workflow-chat .chat-compose-text{font-size:14px}.workflow-chat .chat-send{width:30px;height:30px}.workflow-chat .chat-message-meta{font-size:10px}.workflow-chat .chat-window{border-radius:15px}.chat-caption{font-size:10px;margin-top:10px}.chat-chapter-nav{margin-top:8px}.chat-chapter-nav button{font-size:12px;min-height:36px}.chat-chapter-nav button span{font-size:8px}.workflow-chat dl{gap:10px 14px}.workflow-chat dd{font-size:15px}.workflow-chat .chat-message p.chat-receipt{font-size:12px;margin-top:12px;padding-top:9px}}
+@media(max-width:380px){.chat-caption{font-size:9px}.chat-chapter-nav button{font-size:11px;gap:4px}.chat-chapter-nav button span{display:none}.chat-enhanced .chat-story-segments{height:136px}.chat-enhanced .chat-window{height:calc(var(--chat-available) - 245px)}.chat-story-step>p:not(.chat-step-count){font-size:15px}.workflow-chat{font-size:16px}.workflow-chat .chat-header{padding-inline:14px}.workflow-chat .chat-flow{left:12px;right:12px}}
+@media(prefers-reduced-motion:reduce){.chat-chapter-nav button{transition:none}}

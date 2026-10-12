@@ -24,50 +24,12 @@
   matchMedia('(min-width: 981px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
   $('.back-top')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'instant' : 'smooth' }));
 
-  const steps = $$('[data-workflow-step]');
-  const scene = $('.workflow-screen');
-  const sceneButtons = $$('[data-scene-target]');
-  const statuses = { receive: 'Received', organise: 'Filed', pending: 'Filing', retrieve: 'Found' };
-  function setScene(value) {
-    if (!scene || scene.dataset.scene === value) return;
-    scene.dataset.scene = value;
-    $$('.scene-details', scene).forEach(detail => detail.setAttribute('aria-hidden', String(!detail.classList.contains(`scene-${value}`))));
-    const index = steps.findIndex(step => step.dataset.workflowStep === value);
-    $('.scene-counter').textContent = `0${index + 1} / 04`;
-    $('.journey-status').textContent = statuses[value];
-    steps.forEach(step => step.classList.toggle('is-current', step.dataset.workflowStep === value));
-    sceneButtons.forEach(button => {
-      const active = button.dataset.sceneTarget === value;
-      button.classList.toggle('is-active', active);
-      button.setAttribute('aria-pressed', String(active));
-    });
-  }
-  sceneButtons.forEach(button => button.addEventListener('click', () => {
-    const step = steps.find(item => item.dataset.workflowStep === button.dataset.sceneTarget);
-    if (!step) return;
-    const offset = innerWidth <= 760 ? $('.workflow-sticky').getBoundingClientRect().height + 100 : 145;
-    window.scrollTo({ top: step.getBoundingClientRect().top + scrollY - offset, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
-    setScene(button.dataset.sceneTarget);
-  }));
-
   const progress = $('.scroll-progress');
   const scatter = $('.scatter-scene');
   let ticking = false;
   function onScroll() {
     const height = document.documentElement.scrollHeight - innerHeight;
     if (progress) progress.style.transform = `scaleX(${height > 0 ? Math.min(1, Math.max(0, scrollY / height)) : 0})`;
-    if (steps.length) {
-      const stickyBottom = $('.workflow-sticky').getBoundingClientRect().bottom;
-      const marker = innerWidth <= 760 ? Math.min(innerHeight - 40, Math.max(innerHeight * .65, stickyBottom + 85)) : innerHeight * .53;
-      let selected = steps[0];
-      let closest = Infinity;
-      steps.forEach(step => {
-        const rect = step.getBoundingClientRect();
-        const distance = Math.abs(rect.top + rect.height * .42 - marker);
-        if (distance < closest) { closest = distance; selected = step; }
-      });
-      setScene(selected.dataset.workflowStep);
-    }
     if (scatter && !reducedMotion.matches) {
       const rect = scatter.getBoundingClientRect();
       if (rect.top < innerHeight && rect.bottom > 0) {
