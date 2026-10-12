@@ -27,7 +27,7 @@
   const steps = $$('[data-workflow-step]');
   const scene = $('.workflow-screen');
   const sceneButtons = $$('[data-scene-target]');
-  const statuses = { receive: 'Received', organise: 'Filed', pending: 'Pending', retrieve: 'Found' };
+  const statuses = { receive: 'Received', organise: 'Filed', pending: 'Filing', retrieve: 'Found' };
   function setScene(value) {
     if (!scene || scene.dataset.scene === value) return;
     scene.dataset.scene = value;
@@ -123,9 +123,9 @@
     filterRows();
   }));
   const examples = [
-    { filename: 'GST_Return_Sep_2026.pdf', client: 'Aarav Enterprises', service: 'GST', type: 'Return', period: 'September 2026', status: 'Filed' },
-    { filename: 'Bank_Statement_Q2.pdf', client: 'Mehta & Co.', service: 'Accounting', type: 'Not yet classified', period: 'Q2 2026–27', status: 'Pending' },
-    { filename: 'KYC_Documents.pdf', client: 'Aarav Enterprises', service: 'Onboarding', type: 'KYC records', period: '2026–27', status: 'Filed' }
+    { filename: 'Sharma_GST_Sep.pdf', client: 'Sharma Traders', service: 'GST', type: 'Return', period: 'September 2026', status: 'Filed' },
+    { filename: 'PAN_scan.jpg', client: 'Unknown client', service: 'KYC', type: 'Not yet classified', period: 'Not set', status: 'Pending' },
+    { filename: 'HDFC_bank_stmt.pdf', client: 'Patil & Co', service: 'Bank', type: 'Statement', period: 'Not set', status: 'Filed' }
   ];
   const dialog = $('#document-dialog');
   let dialogTrigger;
@@ -153,7 +153,26 @@
     if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
   });
 
+  const billingButtons = $$('[data-billing]');
+  billingButtons.forEach(button => button.addEventListener('click', () => {
+    const annual = button.dataset.billing === 'annual';
+    billingButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    $$('[data-plan-price]').forEach(price => {
+      price.textContent = annual ? '₹' + (Math.round(Number(price.dataset.monthly) * .85 / 10) * 10).toLocaleString('en-IN') : price.dataset.monthlyLabel;
+    });
+    $$('[data-price-period]').forEach(label => { label.textContent = annual ? '/month · billed annually' : '/month'; });
+    $('#billing-note').textContent = annual
+      ? 'Annual view shows an illustrative 15% prepay discount; the exact percentage is confirmed at sign-up. WhatsApp provider charges are passed through at cost.'
+      : 'Annual prepayment earns a discount. WhatsApp provider charges are passed through at cost.';
+  }));
+
   const form = $('#demo-form');
+  const trialEnquiry = location.hash === '#trial-enquiry';
+  if (form && trialEnquiry) {
+    $('#booking-title').textContent = 'Request a free trial.';
+    $('.booking-intro').textContent = 'Send a free-trial enquiry by email. Our team will discuss the plan and coordinate your 15-minute walkthrough.';
+    $('.form-submit', form).textContent = 'Prepare trial enquiry';
+  }
   form?.addEventListener('submit', event => {
     event.preventDefault();
     const data = new FormData(form);
@@ -168,8 +187,8 @@
     const type = String(data.get('type') || '').trim();
     const email = String(data.get('email') || '').trim();
     const message = String(data.get('message') || '').trim();
-    const subject = `FirmVault demo enquiry — ${firm.replace(/[\r\n]/g, ' ')}`;
-    const body = `Hello FirmVault team,\n\nI'd like to arrange a demo for our firm.\n\nName: ${name}\nFirm: ${firm}\nEmail: ${email}${type ? `\nPractice: ${type}` : ''}${message ? `\n\nOur document workflow / questions:\n${message}` : ''}\n\nPlease contact me to coordinate a suitable time.\n\nThank you,\n${name}`;
+    const subject = `FirmVault ${trialEnquiry ? 'free-trial' : 'demo'} enquiry — ${firm.replace(/[\r\n]/g, ' ')}`;
+    const body = `Hello FirmVault team,\n\n${trialEnquiry ? "I'd like to discuss a free trial and a 15-minute walkthrough for our firm." : "I'd like to arrange a demo for our firm."}\n\nName: ${name}\nFirm: ${firm}\nEmail: ${email}${type ? `\nPractice: ${type}` : ''}${message ? `\n\nOur document workflow / questions:\n${message}` : ''}\n\nPlease contact me to coordinate a suitable time.\n\nThank you,\n${name}`;
     $('#email-copy').value = `To: contact@nexosk.in\nSubject: ${subject}\n\n${body}`;
     $('#email-fallback').hidden = false;
     $('#email-status').textContent = 'Your request is ready. Send it from your email app to arrange your demo.';

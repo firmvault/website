@@ -31,6 +31,8 @@ The default theme is System. Explicit choices are remembered with the browser-lo
 
 ## Product story and visual refinement
 
+The current page copy is imported from the owner's `FirmVault.html`, including the WhatsApp workflow, per-firm pricing, permissions/audit information, security content, roadmap, free-trial offer, and 15-minute walkthrough. Only its content is used; its design, font, and scripts are not imported. The trial action prepares an email enquiry rather than creating an account. See `docs/HTML-CONTENT-IMPORT.md`.
+
 The homepage follows one fictional GST return through employee forwarding, filing, Pending review when needed, and retrieval. The illustrative vault in the animated hero includes search, a Pending filter, and document details.
 
 Following owner feedback, the earlier visual composition is restored: floating documents and context cards, an orbit graphic, a moving forwarding connection, pointer response, scattered-file parallax, section reveals, and a sticky document journey. The original responsive layouts, system appearance, and reduced-motion support are preserved. The quieter visual revision remains recoverable in Git history.
