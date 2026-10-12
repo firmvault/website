@@ -2,6 +2,8 @@
 
 Responsive marketing website with light/dark/system themes, a scroll-driven document journey, searchable illustrative records, and an email demo enquiry page.
 
+Private preview: [FirmVault](https://firmvault.anishghanwat9.chatgpt.site).
+
 ## Local development
 
 Node.js is the only required runtime. No dependency installation is needed.
@@ -46,3 +48,7 @@ $env:TAR_OPTIONS = '--force-local'
 ```
 
 The tracked PNG sharing image is generated from `dist/assets/social-cover.svg`, which uses the approved outlined logo. Regeneration requires Sharp; `scripts/render-cover.mjs` accepts a FIRMVAULT_SHARP_PATH environment variable when using the bundled runtime.
+
+## Earlier website
+
+The earlier website implementation is preserved on the [`v0` branch](https://github.com/firmvault/website/tree/v0). The current implementation, generated pages, and source scripts are on `main`.
