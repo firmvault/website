@@ -1,3 +1,4 @@
+import { renderFilm } from './film.mjs';
 import { renderHero } from './hero.mjs';
 import { renderChatWorkflow } from './chat-workflow.mjs';
 import { pricingSection, capabilitiesSection, aboutSection, quickDemoSection } from './imported-content.mjs';
@@ -13,6 +14,8 @@ ${renderHero(icon)}
 <div class="document-types"><div class="document-type-track"><ul class="document-type-group" aria-label="Document types">${documentTypeList}</ul><ul class="document-type-group" aria-hidden="true">${documentTypeList}</ul></div></div>
 
 <section class="problem-section section-space" id="the-problem"><div class="container problem-grid"><div class="reveal"><p class="eyebrow"><span class="section-number">01</span> THE EVERYDAY PROBLEM</p><h2>The documents arrive.<br><span class="muted-heading">Then they disappear.</span></h2><p class="section-description">Files get buried in individual chats and phones. The hard part isn’t receiving them, it’s remembering where they went. FirmVault gives them one firm-owned home.</p><p class="section-description">Your work needs more than a filename. It needs the client, service, document type, and period that file belongs to.</p></div><div class="scatter-scene reveal" aria-hidden="true"><div class="scatter-grid"></div><div class="scatter-card scatter-one"><span class="scatter-source">A STAFF CHAT ${icon('chat')}</span><strong>GST return</strong><span class="scatter-line"></span><small>“I sent it yesterday.”</small></div><div class="scatter-card scatter-two"><span class="scatter-source">ANOTHER PHONE ${icon('file')}</span><strong>Bank statement</strong><span class="scatter-line"></span><small>“Let me find the file.”</small></div><div class="scatter-card scatter-three"><span class="scatter-source">A FOLDER SOMEWHERE ${icon('folder')}</span><strong>Client agreement</strong><span class="scatter-line"></span><small>“Which version was it?”</small></div><span class="scatter-question">?</span></div></div></section>
+
+${renderFilm()}
 
 ${renderChatWorkflow(icon, arrow)}
 

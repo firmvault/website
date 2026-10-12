@@ -6,9 +6,10 @@ const siteUrl = new URL(origin);
 if (!['https:', 'http:'].includes(siteUrl.protocol) || siteUrl.search || siteUrl.hash) throw new Error('SITE_ORIGIN must be an HTTP(S) site URL without a query or fragment.');
 const basePath = siteUrl.pathname.replace(/\/$/, '');
 await mkdir('dist', { recursive: true });
-await writeFile('dist/styles.css', (await readFile('scripts/styles.css', 'utf8')) + '\n' + (await readFile('scripts/chat-workflow.css', 'utf8')) + '\n' + (await readFile('scripts/hero.css', 'utf8')) + '\n' + (await readFile('scripts/chat-wallpaper.css', 'utf8')) + '\n' + (await readFile('scripts/surfaces.css', 'utf8')));
+await writeFile('dist/styles.css', (await readFile('scripts/styles.css', 'utf8')) + '\n' + (await readFile('scripts/chat-workflow.css', 'utf8')) + '\n' + (await readFile('scripts/hero.css', 'utf8')) + '\n' + (await readFile('scripts/chat-wallpaper.css', 'utf8')) + '\n' + (await readFile('scripts/surfaces.css', 'utf8')) + '\n' + (await readFile('scripts/film.css', 'utf8')));
 await writeFile('dist/app.js', await readFile('scripts/app.js', 'utf8'));
 await writeFile('dist/chat-workflow.js', await readFile('scripts/chat-workflow.js', 'utf8'));
+await writeFile('dist/film.js', await readFile('scripts/film.js', 'utf8'));
 await writeFile('dist/hero.js', await readFile('scripts/hero.js', 'utf8'));
 const hostingNotice = siteUrl.hostname.endsWith('.chatgpt.site')
   ? 'This preview is hosted on ChatGPT Sites. Access is subject to that service’s access controls and data practices.'
@@ -46,11 +47,11 @@ const pages = [
 ];
 for (const [slug, title, description, content] of pages) {
   const canonical = origin + '/' + (slug && slug !== '404' ? slug + '/' : '');
-  const html = `<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f7f5ef"><title>${title}</title><meta name="description" content="${description}">${slug === '404' ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${canonical}">`}<meta property="og:type" content="website"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${origin}/assets/social-cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/assets/symbol.svg" type="image/svg+xml"><script src="/theme.js"></script><link rel="preload" href="/assets/heading.woff" as="font" type="font/woff" crossorigin><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script>${!slug ? '<script src="/chat-workflow.js" defer></script><script src="/hero.js" defer></script>' : ''}</head><body>${header(!slug)}${content}${footer}</body></html>`;
+  const html = `<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f7f5ef"><title>${title}</title><meta name="description" content="${description}">${slug === '404' ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${canonical}">`}<meta property="og:type" content="website"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${origin}/assets/social-cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/assets/symbol.svg" type="image/svg+xml"><script src="/theme.js"></script><link rel="preload" href="/assets/heading.woff" as="font" type="font/woff" crossorigin><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script>${!slug ? '<script src="/chat-workflow.js" defer></script><script src="/hero.js" defer></script><script src="/film.js" defer></script>' : ''}</head><body>${header(!slug)}${content}${footer}</body></html>`;
   const output = html
     .replace(/<br>(?=\S)/g, '<br> ')
     .replace('This version is hosted on ChatGPT Sites. Access to the hosted website is subject to that service’s access controls and data practices.', hostingNotice)
-    .replace(/\b(src|href)="\/([^\"]*)"/g, (_, attribute, target) => `${attribute}="${basePath}/${target}"`);
+    .replace(/\b(src|href|poster)="\/([^\"]*)"/g, (_, attribute, target) => `${attribute}="${basePath}/${target}"`);
   const directory = slug && slug !== '404' ? `dist/${slug}` : 'dist';
   await mkdir(directory, { recursive: true });
   await writeFile(`${directory}/${slug === '404' ? '404.html' : 'index.html'}`, output);
