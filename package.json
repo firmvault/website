@@ -3,5 +3,5 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "scripts": { "dev": "node scripts/serve.mjs", "check": "node scripts/check.mjs" }
+  "scripts": { "dev": "node scripts/serve.mjs", "build": "node scripts/render.mjs", "check": "node scripts/check.mjs" }
 }

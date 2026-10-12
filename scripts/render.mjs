@@ -1,6 +1,12 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 
-const origin = 'https://firmvault.anishghanwat9.chatgpt.site';
+const origin = (process.env.SITE_ORIGIN || 'https://firmvault.co.in').replace(/\/$/, '');
+const siteUrl = new URL(origin);
+if (!['https:', 'http:'].includes(siteUrl.protocol) || siteUrl.search || siteUrl.hash) throw new Error('SITE_ORIGIN must be an HTTP(S) site URL without a query or fragment.');
+const basePath = siteUrl.pathname.replace(/\/$/, '');
+const hostingNotice = siteUrl.hostname.endsWith('.chatgpt.site')
+  ? 'This preview is hosted on ChatGPT Sites. Access is subject to that service’s access controls and data practices.'
+  : 'This website is hosted on GitHub Pages. GitHub handles hosting requests under its own data practices.';
 const icon = (name, classes = '') => `<svg class="icon ${classes}" aria-hidden="true"><use href="/icons.svg#${name}"></use></svg>`;
 const arrow = icon('arrow-up');
 const theme = `<details class="theme-picker"><summary aria-label="Choose colour theme">${icon('monitor', 'theme-system-icon')}${icon('sun', 'theme-light-icon')}${icon('moon', 'theme-dark-icon')}<span data-theme-label>System</span></summary><div class="theme-options" role="group" aria-label="Colour theme"><button type="button" data-theme-value="system" aria-pressed="true">${icon('monitor')}System</button><button type="button" data-theme-value="light" aria-pressed="false">${icon('sun')}Light</button><button type="button" data-theme-value="dark" aria-pressed="false">${icon('moon')}Dark</button></div></details>`;
@@ -61,13 +67,20 @@ const pages = [
 for (const [slug, title, description, content] of pages) {
   const canonical = origin + '/' + (slug && slug !== '404' ? slug + '/' : '');
   const html = `<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f7f5ef"><title>${title}</title><meta name="description" content="${description}">${slug === '404' ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${canonical}">`}<meta property="og:type" content="website"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${origin}/assets/social-cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/assets/symbol.svg" type="image/svg+xml"><script src="/theme.js"></script><link rel="preload" href="/assets/heading.woff" as="font" type="font/woff" crossorigin><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script></head><body>${header(!slug)}${content}${footer}</body></html>`;
-  const output = html.replace('need<br>for order.', 'need<br> for order.').replace('scene-details scene-receive"', 'scene-details scene-receive" aria-hidden="false"').replace(/scene-details scene-(organise|pending|retrieve)"/g, 'scene-details scene-$1" aria-hidden="true"');
+  const output = html
+    .replace('need<br>for order.', 'need<br> for order.')
+    .replace('scene-details scene-receive"', 'scene-details scene-receive" aria-hidden="false"')
+    .replace(/scene-details scene-(organise|pending|retrieve)"/g, 'scene-details scene-$1" aria-hidden="true"')
+    .replace('This version is hosted on ChatGPT Sites. Access to the hosted website is subject to that service’s access controls and data practices.', hostingNotice)
+    .replace(/\b(src|href)="\/([^\"]*)"/g, (_, attribute, target) => `${attribute}="${basePath}/${target}"`);
   const directory = slug && slug !== '404' ? `dist/${slug}` : 'dist';
   await mkdir(directory, { recursive: true });
   await writeFile(`${directory}/${slug === '404' ? '404.html' : 'index.html'}`, output);
 }
 await writeFile('dist/robots.txt', `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
 await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.filter(([slug]) => slug !== '404').map(([slug]) => `<url><loc>${origin}/${slug ? slug + '/' : ''}</loc></url>`).join('')}</urlset>`);
-console.log('Generated 6 pages, sitemap, and robots.txt.');
+await writeFile('dist/CNAME', 'firmvault.co.in\n');
+await writeFile('dist/.nojekyll', '');
+console.log(`Generated 6 pages, sitemap, robots.txt, and Pages markers for ${origin}.`);
 const approvedLogo = await readFile('dist/assets/logo-white.svg', 'utf8');
 await writeFile('dist/assets/social-cover.svg', `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#101114"/><g transform="translate(64 38)">${approvedLogo.replace('width="1464" height="426"', 'width="230" height="67"')}</g><path d="M900 50v430h250M950 100v430h250M1000 150v430h250" stroke="#92a6ff" stroke-width="2" fill="none" opacity=".15"/><g font-family="Arial,sans-serif" font-weight="700" font-size="80" fill="#f4f2ec"><text x="70" y="250">Your firm’s</text><text x="70" y="342">documents.</text><text x="70" y="434" fill="#92a6ff">In order.</text></g><text x="70" y="550" font-family="Arial,sans-serif" font-size="24" fill="#a4a6af">Forward. Organise. Retrieve.</text></svg>`);

@@ -4,6 +4,8 @@ import path from 'node:path';
 import vm from 'node:vm';
 
 const root = path.resolve('dist');
+const origin = (process.env.SITE_ORIGIN || 'https://firmvault.co.in').replace(/\/$/, '');
+const basePath = new URL(origin).pathname.replace(/\/$/, '');
 async function list(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
   return (await Promise.all(entries.map(entry => entry.isDirectory() ? list(path.join(directory, entry.name)) : path.join(directory, entry.name)))).flat();
@@ -20,7 +22,9 @@ for (const file of htmlFiles) {
   for (const [, link] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
     if (/^(https?:|mailto:|data:)/.test(link)) continue;
     const [pathname, fragment] = link.split('#');
-    const local = pathname ? path.resolve(root, pathname.replace(/^\//, '')) : file;
+    if (pathname && basePath) assert(pathname.startsWith(basePath + '/'), `${file}: missing Pages base path in ${link}`);
+    const relativePath = basePath && pathname.startsWith(basePath + '/') ? pathname.slice(basePath.length) : pathname;
+    const local = pathname ? path.resolve(root, relativePath.replace(/^\//, '')) : file;
     const target = pathname.endsWith('/') ? path.join(local, 'index.html') : local;
     await access(target);
     if (fragment && target.endsWith('.html')) {
@@ -78,4 +82,9 @@ for (const [foreground, background, minimum] of pairs) assert(contrast(foregroun
 const booking = await readFile('dist/book-demo/index.html', 'utf8');
 assert.match(booking, /contact@nexosk\.in/);
 assert.match(booking, /This opens your email app/);
+assert.equal((await readFile('dist/CNAME', 'utf8')).trim(), 'firmvault.co.in');
+await access('dist/.nojekyll');
+const homepage = await readFile('dist/index.html', 'utf8');
+assert(homepage.includes(`rel="canonical" href="${origin}/"`));
+assert((await readFile('dist/sitemap.xml', 'utf8')).includes(`${origin}/book-demo/`));
 console.log(`PASS: ${htmlFiles.length} pages, ${references} local references, system and saved theme behavior, blocked storage fallback, ${pairs.length} contrast pairs, and demo disclosure.`);

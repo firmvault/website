@@ -4,13 +4,15 @@ Responsive marketing website with light/dark/system themes, a scroll-driven docu
 
 Private preview: [FirmVault](https://firmvault.anishghanwat9.chatgpt.site).
 
+Production domain: `firmvault.co.in`. GitHub Pages deployment is defined in `.github/workflows/github-pages.yml`.
+
 ## Local development
 
 Node.js is the only required runtime. No dependency installation is needed.
 
 ```powershell
-node scripts/render.mjs
-node scripts/check.mjs
+npm run build
+npm run check
 node scripts/serve.mjs
 ```
 
@@ -34,11 +36,21 @@ The user supplied `contact@nexosk.in`. The form validates and prepares a mailto 
 
 All shown document data is fictional and labelled as illustrative. This website implements presentation and browser-local examples, not the FirmVault document backend.
 
-The About, Privacy, and Website Terms pages cover the supplied company attribution, email enquiry flow, theme storage, and current hosting. Before a public business launch, review these against actual company and product arrangements. A direct calendar integration and the `firmvault.co.in` custom domain can be added when supplied and configured.
+The About, Privacy, and Website Terms pages cover the supplied company attribution, email enquiry flow, theme storage, and hosting. Before a public business launch, review these against actual company and product arrangements. A direct calendar integration can be added when supplied and configured.
 
 ## Deployment
 
-The tracked `.openai/hosting.json` binds this checkout to its private ChatGPT Site and deploys `dist/`. Use the Sites plugin source workflow to synchronize and publish the exact source version. Keep private access until the owner requests a change.
+GitHub Actions builds and checks the website, uploads only `dist/`, and deploys it to GitHub Pages on each push to `main`. It can also be run manually from Actions.
+
+A repository owner or Pages administrator must configure **Settings → Pages → Source → GitHub Actions**, set the custom domain to **firmvault.co.in**, and keep HTTPS enforcement enabled once the certificate is available. The generated `CNAME` file records the intended domain; it does not replace the GitHub settings step for an Actions deployment.
+
+The workflow reads the live Pages base URL. Before the custom domain is configured, it can build working `/website/` links for the default GitHub Pages URL. Once the domain is set, it builds root links and production metadata for `https://firmvault.co.in`. Local builds default to that production origin. Set `SITE_ORIGIN` to override it.
+
+The domain’s apex A records should point to `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, and `185.199.111.153`. The `www` CNAME should point to `firmvault.github.io`.
+
+The existing `.openai/hosting.json` retains the earlier private ChatGPT Site identity. It is not used by the GitHub Pages workflow.
+
+### Earlier private preview tooling
 
 On Windows, run the Site source workflow with Git Bash first on PATH and TAR_OPTIONS set to `--force-local`. This avoids the WSL path interpretation and GNU tar treating a drive-letter archive path as a remote hostname.
 
