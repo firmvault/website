@@ -80,7 +80,12 @@
 }
 
 /* Supplied HTML content, presented with the existing FirmVault visual identity. */
-.document-types{border-bottom:1px solid var(--border);padding-block:20px}.document-types>.container{display:flex;gap:12px 24px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.document-types{border-bottom:1px solid var(--border);padding-block:20px;overflow:hidden;color:var(--muted);font-size:14px}
+.document-type-track{display:flex;width:max-content;animation:document-types-scroll 30s linear infinite}
+.document-type-group{display:flex;align-items:center;justify-content:space-around;gap:46px;flex:none;min-width:100vw;list-style:none;margin:0;padding:0 23px}
+.document-type-group li{white-space:nowrap}
+@keyframes document-types-scroll{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.document-type-track{width:100%;animation:none;transform:none}.document-type-group{width:100%;min-width:0;flex-wrap:wrap;gap:12px 24px;padding-inline:20px}.document-type-group[aria-hidden=true]{display:none}}
 .content-import-hero h1{font-size:clamp(52px,5.45vw,80px);line-height:1.04}
 .content-import-hero .hero-description{font-size:19px;max-width:490px}
 .content-import-hero .hero-actions{gap:20px}
