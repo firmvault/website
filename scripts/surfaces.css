@@ -14,14 +14,14 @@
 
 /* The grain is one small, static local asset; it never covers text or controls. */
 #fv-hero{
-  background-image:url('assets/paper-grain.svg'),radial-gradient(ellipse at 86% 44%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 65%);
-  background-size:180px 180px,100% 100%;
+  background-image:url('assets/paper-grain.svg'),linear-gradient(var(--surface-rule) 1px,transparent 1px),linear-gradient(90deg,var(--surface-rule) 1px,transparent 1px),radial-gradient(ellipse at 86% 44%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 65%);
+  background-size:180px 180px,64px 64px,64px 64px,100% 100%;
+  background-position:0 0;
 }
 #fv-hero .ha-art:before{
   inset:52px 0 30px;
-  background-image:linear-gradient(var(--surface-rule) 1px,transparent 1px),linear-gradient(90deg,var(--surface-rule) 1px,transparent 1px),radial-gradient(ellipse at 72% 50%,color-mix(in srgb,var(--accent) 17%,transparent),transparent 72%);
-  background-size:64px 64px,64px 64px,100% 100%;
-  mask-image:radial-gradient(ellipse at 62% 50%,#000 24%,transparent 80%);
+  background-image:radial-gradient(ellipse at 72% 50%,color-mix(in srgb,var(--accent) 17%,transparent),transparent 72%);
+  background-size:100% 100%;
 }
 #fv-hero .ha-wa,#fv-hero .ha-dashboard,.workflow-chat .chat-window{
   border-color:color-mix(in srgb,var(--text) 10%,var(--border));
@@ -93,7 +93,7 @@
   }
 }
 @media(max-width:760px){
-  #fv-hero .ha-art:before{background-size:48px 48px,48px 48px,100% 100%}
+  #fv-hero{background-size:180px 180px,48px 48px,48px 48px,100% 100%}
   .structure-section{background-size:100% 80px}
 }
 @media(prefers-reduced-motion:reduce){

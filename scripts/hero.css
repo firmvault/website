@@ -128,6 +128,11 @@ html[data-theme="dark"] #fv-hero .ha-brand-image{filter:invert(1)}
 #fv-hero .ha-footer>span:last-child{text-align:right;max-width:45%}
 #fv-hero .ha-link path{stroke:var(--ha-blue);opacity:.35;stroke-width:1.35}
 #fv-hero .ha-packet{border-radius:4px;color:var(--ha-blue);border-color:color-mix(in srgb,var(--ha-blue) 40%,var(--ha-line));box-shadow:0 8px 24px color-mix(in srgb,var(--ha-blue) 16%,transparent);width:47px;height:34px}
+/* The same document takes on the colour of its position between the two tools. */
+#fv-hero .ha-link path{stroke:url(#fv-transfer-gradient);opacity:.65}
+#fv-hero .ha-transfer-start{stop-color:var(--ha-green)}
+#fv-hero .ha-transfer-end{stop-color:var(--ha-blue)}
+#fv-hero .ha-packet{--ha-transfer-progress:0%;--ha-transfer-colour:color-mix(in srgb,var(--ha-blue) var(--ha-transfer-progress),var(--ha-green));color:var(--ha-transfer-colour);border-color:color-mix(in srgb,var(--ha-transfer-colour) 65%,var(--ha-line));background:color-mix(in srgb,var(--ha-transfer-colour) 9%,var(--ha-panel));box-shadow:0 8px 24px color-mix(in srgb,var(--ha-transfer-colour) 20%,transparent)}
 #fv-hero .hero-bottom{display:flex;align-items:center;justify-content:space-between;gap:15px;border-top:1px solid var(--ha-line);padding:17px 0;margin:28px 42px 0}
 #fv-hero .hero-bottom>span{font:500 9px/1.6 'IBM Plex Mono',monospace;letter-spacing:.035em;color:var(--ha-muted);max-width:50%}
 #fv-hero .ha-toolbar{margin:0;gap:18px;flex:none}

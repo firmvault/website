@@ -6,6 +6,7 @@
   const body = find('.ha-chat-body'), flow = find('.ha-flow'), row = find('.ha-dash-row');
   const state = find('.ha-file-state'), scene = find('.ha-scene');
   const packet = find('.ha-packet'), path = find('.ha-link path'), pause = find('.ha-play');
+  const transferGradient = find('#fv-transfer-gradient');
   const messages = [...flow.children].map(node => ({node, at: Number(node.dataset.at), camera: 0}));
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let playing = !reduced.matches, visible = false, elapsed = 800, last = 0, frame = 0, points;
@@ -30,6 +31,10 @@
     points.one.x = Math.min(points.one.x, art.clientWidth - 6);
     points.two.x = Math.min(points.two.x, art.clientWidth - 6);
     path.setAttribute('d', `M${start.x} ${start.y} C${points.one.x} ${points.one.y} ${points.two.x} ${points.two.y} ${end.x} ${end.y}`);
+    transferGradient.setAttribute('x1', start.x);
+    transferGradient.setAttribute('y1', start.y);
+    transferGradient.setAttribute('x2', end.x);
+    transferGradient.setAttribute('y2', end.y);
   }
   function position(p) {
     const q = 1 - p;
@@ -63,7 +68,12 @@
     if (t >= 4.5 && t <= 6.7) trip = (t - 4.5) / 2.2;
     else if (t >= 10.4 && t <= 12.2) { trip = (t - 10.4) / 1.8; reverse = true; }
     if (trip >= 0 && points) {
-      const pos = position(reverse ? 1 - ease(trip) : ease(trip));
+      const progress = reverse ? 1 - ease(trip) : ease(trip);
+      const pos = position(progress);
+      // Match the SVG gradient at the badge's actual point on the curved path.
+      const dx = points.end.x - points.start.x, dy = points.end.y - points.start.y;
+      const colourProgress = Math.max(0, Math.min(1, ((pos.x - points.start.x) * dx + (pos.y - points.start.y) * dy) / (dx * dx + dy * dy || 1)));
+      packet.style.setProperty('--ha-transfer-progress', `${(colourProgress * 100).toFixed(2)}%`);
       packet.style.opacity = Math.min(1, trip * 6, (1-trip) * 6);
       packet.style.transform = `translate(${pos.x-23.5}px,${pos.y-17}px) scale(.9)`;
     } else packet.style.opacity = 0;

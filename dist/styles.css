@@ -342,6 +342,11 @@ html[data-theme="dark"] #fv-hero .ha-brand-image{filter:invert(1)}
 #fv-hero .ha-footer>span:last-child{text-align:right;max-width:45%}
 #fv-hero .ha-link path{stroke:var(--ha-blue);opacity:.35;stroke-width:1.35}
 #fv-hero .ha-packet{border-radius:4px;color:var(--ha-blue);border-color:color-mix(in srgb,var(--ha-blue) 40%,var(--ha-line));box-shadow:0 8px 24px color-mix(in srgb,var(--ha-blue) 16%,transparent);width:47px;height:34px}
+/* The same document takes on the colour of its position between the two tools. */
+#fv-hero .ha-link path{stroke:url(#fv-transfer-gradient);opacity:.65}
+#fv-hero .ha-transfer-start{stop-color:var(--ha-green)}
+#fv-hero .ha-transfer-end{stop-color:var(--ha-blue)}
+#fv-hero .ha-packet{--ha-transfer-progress:0%;--ha-transfer-colour:color-mix(in srgb,var(--ha-blue) var(--ha-transfer-progress),var(--ha-green));color:var(--ha-transfer-colour);border-color:color-mix(in srgb,var(--ha-transfer-colour) 65%,var(--ha-line));background:color-mix(in srgb,var(--ha-transfer-colour) 9%,var(--ha-panel));box-shadow:0 8px 24px color-mix(in srgb,var(--ha-transfer-colour) 20%,transparent)}
 #fv-hero .hero-bottom{display:flex;align-items:center;justify-content:space-between;gap:15px;border-top:1px solid var(--ha-line);padding:17px 0;margin:28px 42px 0}
 #fv-hero .hero-bottom>span{font:500 9px/1.6 'IBM Plex Mono',monospace;letter-spacing:.035em;color:var(--ha-muted);max-width:50%}
 #fv-hero .ha-toolbar{margin:0;gap:18px;flex:none}
@@ -432,14 +437,14 @@ html[data-theme="dark"] #fv-hero .ha-brand-image{filter:invert(1)}
 
 /* The grain is one small, static local asset; it never covers text or controls. */
 #fv-hero{
-  background-image:url('assets/paper-grain.svg'),radial-gradient(ellipse at 86% 44%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 65%);
-  background-size:180px 180px,100% 100%;
+  background-image:url('assets/paper-grain.svg'),linear-gradient(var(--surface-rule) 1px,transparent 1px),linear-gradient(90deg,var(--surface-rule) 1px,transparent 1px),radial-gradient(ellipse at 86% 44%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 65%);
+  background-size:180px 180px,64px 64px,64px 64px,100% 100%;
+  background-position:0 0;
 }
 #fv-hero .ha-art:before{
   inset:52px 0 30px;
-  background-image:linear-gradient(var(--surface-rule) 1px,transparent 1px),linear-gradient(90deg,var(--surface-rule) 1px,transparent 1px),radial-gradient(ellipse at 72% 50%,color-mix(in srgb,var(--accent) 17%,transparent),transparent 72%);
-  background-size:64px 64px,64px 64px,100% 100%;
-  mask-image:radial-gradient(ellipse at 62% 50%,#000 24%,transparent 80%);
+  background-image:radial-gradient(ellipse at 72% 50%,color-mix(in srgb,var(--accent) 17%,transparent),transparent 72%);
+  background-size:100% 100%;
 }
 #fv-hero .ha-wa,#fv-hero .ha-dashboard,.workflow-chat .chat-window{
   border-color:color-mix(in srgb,var(--text) 10%,var(--border));
@@ -511,7 +516,7 @@ html[data-theme="dark"] #fv-hero .ha-brand-image{filter:invert(1)}
   }
 }
 @media(max-width:760px){
-  #fv-hero .ha-art:before{background-size:48px 48px,48px 48px,100% 100%}
+  #fv-hero{background-size:180px 180px,48px 48px,48px 48px,100% 100%}
   .structure-section{background-size:100% 80px}
 }
 @media(prefers-reduced-motion:reduce){
