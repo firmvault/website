@@ -31,9 +31,9 @@ The default theme is System. Explicit choices are remembered with the browser-lo
 
 ## Product story and visual refinement
 
-The homepage follows one fictional GST return through employee forwarding, filing, and retrieval. Pending is a conditional review path attached to filing, with an optional desktop scene. The example vault is a separate interactive website demonstration with search, a Pending filter, document details, and a clear-search action.
+The homepage follows one fictional GST return through employee forwarding, filing, Pending review when needed, and retrieval. The illustrative vault in the animated hero includes search, a Pending filter, and document details.
 
-On larger screens with enough viewport height, the narrative controls a steady scene panel. Tablets, phones, short screens, and reduced-motion users receive stacked steps with inline examples. Continuous cues pause when off screen or when the tab is hidden. Pointer response moves only the incoming cue; interactive document controls stay steady.
+Following owner feedback, the earlier visual composition is restored: floating documents and context cards, an orbit graphic, a moving forwarding connection, pointer response, scattered-file parallax, section reveals, and a sticky document journey. The original responsive layouts, system appearance, and reduced-motion support are preserved. The quieter visual revision remains recoverable in Git history.
 
 Real product screenshots and approved customer feedback have not been supplied. All concept visuals remain labelled, and no testimonials or unverified product claims are added. See `docs/PRODUCT-STORY-VISUAL-REFINEMENT.md` for this iteration's delivery notes and evidence requirements.
 

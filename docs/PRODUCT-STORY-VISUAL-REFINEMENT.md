@@ -2,7 +2,13 @@
 
 Implementation date: 12 October 2026.
 
-## Delivered
+## Current design following owner feedback
+
+The owner preferred the earlier website's motion graphics. Its animated visual composition has been restored, including floating document/context cards, orbit and forwarding graphics, pointer response, scattered-file parallax, section reveals, and the sticky scrolling document journey. The quieter refinement below is retained in Git history as a prior iteration, rather than the current visual design.
+
+The restored layout retains clearer copy about employee forwarding, the four filing details, and Pending as a conditional review path. About and demo copy remain aligned with that story. System appearance, light/dark themes, the original responsive layout, reduced-motion support, and the email enquiry route remain available.
+
+## Prior refinement iteration
 
 - Clear opening description of employees forwarding documents to FirmVault's WhatsApp number, followed by filing and central retrieval.
 - Connected narrative using a fictional GST return and the four filing dimensions: client, service, document type, and period.
