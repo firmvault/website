@@ -25,10 +25,10 @@
   inset:0;
   z-index:-1;
   pointer-events:none;
-  background-image:linear-gradient(var(--surface-rule-soft) 1px,transparent 1px),linear-gradient(90deg,var(--surface-rule-soft) 1px,transparent 1px),radial-gradient(ellipse at 12% 45%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 78%);
+  background-image:linear-gradient(var(--surface-rule-soft) 1px,transparent 1px),linear-gradient(90deg,var(--surface-rule-soft) 1px,transparent 1px),radial-gradient(ellipse at 88% 45%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 78%);
   background-size:64px 64px,64px 64px,100% 100%;
   background-position:left top;
-  mask-image:linear-gradient(90deg,#000 0%,rgb(0 0 0 / .75) 30%,transparent 100%),linear-gradient(transparent,#000 12%,#000 86%,transparent);
+  mask-image:linear-gradient(270deg,#000 0%,rgb(0 0 0 / .75) 30%,transparent 100%),linear-gradient(transparent,#000 12%,#000 86%,transparent);
   mask-composite:intersect;
 }
 #fv-hero .ha-art:before{display:none}

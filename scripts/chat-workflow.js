@@ -110,7 +110,7 @@
     const header = document.querySelector('.site-header');
     top = (header?.getBoundingClientRect().height || 72) + 14;
     const available = Math.floor(innerHeight - top - 18);
-    const mobile = innerWidth <= 760;
+    const mobile = innerWidth <= 900;
     enabled = !reduced.matches && available >= (mobile ? 545 : 510) && typeof requestAnimationFrame === 'function';
     if (!enabled) { resetStatic(); return; }
     root.style.setProperty('--chat-top', `${top}px`);
