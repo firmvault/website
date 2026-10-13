@@ -8,7 +8,8 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const mouse = matchMedia('(hover: hover) and (pointer: fine)');
   let inView = false, preview = true, held = false, pending = false;
-  let frame = 0, target = null, current = null, pointer = null;
+  let frame = 0, target = { x: 0, y: 0 }, current = { x: 0, y: 0 }, pointer = null;
+  let geometry = null, lastFrame = 0;
   video.controls = false;
   video.muted = true;
   video.loop = true;
@@ -23,8 +24,10 @@
   };
   const stopFollowing = () => {
     if (frame) cancelAnimationFrame(frame);
-    frame = 0; target = null; current = null; pointer = null;
-    screen.classList.remove('is-following');
+    frame = 0; lastFrame = 0; pointer = null; geometry = null;
+    target = { x: 0, y: 0 }; current = { x: 0, y: 0 };
+    screen.classList.remove('is-following', 'is-gliding');
+    paintPosition();
   };
   const pauseOffscreen = () => {
     if (!immersive()) video.pause();
@@ -43,6 +46,7 @@
   async function playFilm() {
     if (button.disabled || !preview && !video.ended) return;
     preview = false;
+    button.hidden = true;
     stopFollowing();
     updateToggle();
     button.disabled = true;
@@ -84,35 +88,66 @@
     status.textContent = 'The film could not load. Please try again in a moment.';
   });
 
-  // Follow mouse movement with one animation frame, without intercepting native controls.
-  function follow() {
+  // Animate only the transform. Geometry is measured on entry/layout changes,
+  // rather than reading layout on every mouse event or animation frame.
+  function paintPosition() {
+    screen.style.setProperty('--film-offset-x', `${current.x.toFixed(2)}px`);
+    screen.style.setProperty('--film-offset-y', `${current.y.toFixed(2)}px`);
+  }
+  function scheduleFollowing() {
+    if (!frame) frame = requestAnimationFrame(follow);
+  }
+  function follow(stamp) {
     frame = 0;
-    if (!target || !current) return;
-    current.x += (target.x - current.x) * .24;
-    current.y += (target.y - current.y) * .24;
-    screen.style.setProperty('--film-cursor-x', `${current.x.toFixed(1)}px`);
-    screen.style.setProperty('--film-cursor-y', `${current.y.toFixed(1)}px`);
-    if (Math.abs(target.x - current.x) + Math.abs(target.y - current.y) > .15) frame = requestAnimationFrame(follow);
+    const delta = lastFrame ? Math.min(40, stamp - lastFrame) : 16.7;
+    lastFrame = stamp;
+    const amount = 1 - Math.exp(-delta / (pointer ? 85 : 135));
+    current.x += (target.x - current.x) * amount;
+    current.y += (target.y - current.y) * amount;
+    if (Math.abs(target.x - current.x) + Math.abs(target.y - current.y) < .08) {
+      current = { ...target }; lastFrame = 0;
+      if (!pointer) screen.classList.remove('is-gliding');
+    } else scheduleFollowing();
+    paintPosition();
+  }
+  function measurePointerArea() {
+    const bounds = screen.getBoundingClientRect();
+    const width = button.offsetWidth, height = button.offsetHeight;
+    const bottom = parseFloat(getComputedStyle(button).bottom) || bounds.height * .06;
+    geometry = { bounds, halfWidth: width / 2 + 10, halfHeight: height / 2 + 10,
+      homeX: bounds.width / 2, homeY: bounds.height - bottom - height / 2 };
+  }
+  function returnToCentre() {
+    pointer = null;
+    target = { x: 0, y: 0 };
+    screen.classList.remove('is-following');
+    if (!reduced.matches && preview) scheduleFollowing();
+    else stopFollowing();
   }
   function moveToPointer() {
     if (!pointer) return;
-    const bounds = screen.getBoundingClientRect();
-    if (pointer.x < bounds.left || pointer.x > bounds.right || pointer.y < bounds.top || pointer.y > bounds.bottom) { stopFollowing(); return; }
-    const halfWidth = button.offsetWidth / 2 + 10, halfHeight = button.offsetHeight / 2 + 10;
+    if (!geometry) measurePointerArea();
+    const { bounds, halfWidth, halfHeight, homeX, homeY } = geometry;
+    if (pointer.x < bounds.left || pointer.x > bounds.right || pointer.y < bounds.top || pointer.y > bounds.bottom) { returnToCentre(); return; }
     const clamp = (value, margin, size) => Math.max(margin, Math.min(size - margin, value));
-    target = { x: clamp(pointer.x - bounds.left, halfWidth, bounds.width), y: clamp(pointer.y - bounds.top, halfHeight, bounds.height) };
-    if (!current) current = { ...target };
-    screen.classList.add('is-following');
-    if (!frame) frame = requestAnimationFrame(follow);
+    target = { x: clamp(pointer.x - bounds.left, halfWidth, bounds.width) - homeX,
+      y: clamp(pointer.y - bounds.top, halfHeight, bounds.height) - homeY };
+    screen.classList.add('is-following', 'is-gliding');
+    scheduleFollowing();
   }
-  screen.addEventListener('pointermove', event => {
+  function capturePointer(event) {
     if (!preview || event.pointerType !== 'mouse' || !mouse.matches || reduced.matches || button.matches(':focus-visible')) return;
     pointer = { x: event.clientX, y: event.clientY };
     moveToPointer();
-  });
-  window.addEventListener('scroll', moveToPointer, { passive: true });
+  }
+  screen.addEventListener('pointerenter', event => { geometry = null; capturePointer(event); });
+  screen.addEventListener('pointermove', capturePointer, { passive: true });
+  window.addEventListener('scroll', () => {
+    geometry = null;
+    moveToPointer();
+  }, { passive: true });
   window.addEventListener('resize', stopFollowing, { passive: true });
-  screen.addEventListener('pointerleave', stopFollowing);
+  screen.addEventListener('pointerleave', returnToCentre);
   button.addEventListener('focus', stopFollowing);
   mouse.addEventListener('change', stopFollowing);
   reduced.addEventListener('change', () => {
@@ -120,6 +155,10 @@
     if (preview) { if (reduced.matches) video.pause(); else startPreview(); }
     updateToggle();
   });
+  if ('ResizeObserver' in window) {
+    const resize = new ResizeObserver(() => { geometry = null; moveToPointer(); });
+    resize.observe(screen); resize.observe(button);
+  }
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(([entry]) => {
       // Start after a meaningful part of the film is visible; pause as it leaves.

@@ -546,7 +546,9 @@ html[data-theme="dark"] #fv-hero .ha-brand-image{filter:invert(1)}
 @media(max-width:760px){.film-section{padding:28px 0 44px}.film-section::before{background-size:180px 180px,48px 48px,48px 48px}.film-intro{align-items:flex-start;flex-direction:column;gap:6px;margin-bottom:15px}.film-intro h2{font-size:19px}.film-duration{font-size:8px}.film-frame-bar{padding:10px 12px;min-height:37px}.film-filename{font-size:8px}.film-window-brand{display:none}.film-window-dots{gap:4px}.film-window-dots i{width:6px;height:6px}.film-shell{border-radius:10px}.film-play{padding:7px 13px 7px 7px;gap:8px;min-height:44px;bottom:5%}.film-play-icon{width:28px;height:28px}.film-play-icon svg{width:15px;height:15px}.film-play strong{font-size:12px}.film-play>span:last-child{gap:10px}.film-play small{font-size:10px;padding-left:10px}.film-below{flex-direction:column;gap:16px;margin-top:18px}.film-note{font-size:13px}.film-overview{width:100%;font-size:13px}}
 .film-preview-toggle{padding:4px 0;min-height:24px;border:0;background:transparent;color:var(--muted);font:10px/1.5 'IBM Plex Mono',monospace;cursor:pointer}.film-preview-toggle:hover{color:var(--text)}.film-preview-toggle[hidden]{display:none}
 .film-frame-bar,.film-screen{user-select:none}.film-screen video{-webkit-user-drag:none}
-.film-screen.is-following{cursor:none}.film-screen.is-following .film-play{left:var(--film-cursor-x,50%);top:var(--film-cursor-y,50%);bottom:auto;transform:translate(-50%,-50%);pointer-events:none;will-change:left,top}
+.film-play{transform:translate3d(calc(-50% + var(--film-offset-x,0px)),var(--film-offset-y,0px),0);backdrop-filter:none}
+.film-screen.is-following{cursor:none}.film-screen.is-following .film-play{pointer-events:none}
+.film-screen.is-gliding .film-play{will-change:transform}
 .film-play:focus-visible{left:50%;top:auto;bottom:6%;transform:translateX(-50%)}
 @media(max-width:760px){.film-filename{position:static;transform:none;font-size:8px}.film-frame-bar{gap:8px}.film-preview-toggle{font-size:8px;min-height:24px}}
 @media(prefers-reduced-motion:reduce){.film-play,.film-overview summary>span{transition:none}}
