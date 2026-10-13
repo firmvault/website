@@ -388,6 +388,7 @@ html[data-theme="dark"] #fv-hero .ha-brand-image{filter:invert(1)}
 #fv-hero .hero-copy{z-index:6}
 
 #fv-hero .hero-actions .hero-primary{color:#fff;font-size:16px}
+#fv-hero .hero-actions .icon{width:18px;height:18px;stroke-width:2;flex-shrink:0}
 #fv-hero .hero-bottom{margin:28px auto 0;padding-block:17px}
 #fv-hero .hero-bottom-actions{display:flex;align-items:center;gap:24px}
 #fv-hero .ha-control{min-height:44px;padding:8px 0;font:400 12px/1.4 'Source Sans 3',sans-serif}
