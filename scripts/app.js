@@ -115,19 +115,6 @@
     if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
   });
 
-  const billingButtons = $$('[data-billing]');
-  billingButtons.forEach(button => button.addEventListener('click', () => {
-    const annual = button.dataset.billing === 'annual';
-    billingButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-    $$('[data-plan-price]').forEach(price => {
-      price.textContent = annual ? '₹' + (Math.round(Number(price.dataset.monthly) * .85 / 10) * 10).toLocaleString('en-IN') : price.dataset.monthlyLabel;
-    });
-    $$('[data-price-period]').forEach(label => { label.textContent = annual ? '/month · billed annually' : '/month'; });
-    $('#billing-note').textContent = annual
-      ? 'Annual view shows an illustrative 15% prepay discount; the exact percentage is confirmed at sign-up. WhatsApp provider charges are passed through at cost.'
-      : 'Annual prepayment earns a discount. WhatsApp provider charges are passed through at cost.';
-  }));
-
   const form = $('#demo-form');
   const trialEnquiry = location.hash === '#trial-enquiry';
   if (form && trialEnquiry) {

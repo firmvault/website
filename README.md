@@ -75,3 +75,8 @@ The tracked PNG sharing image is generated from `dist/assets/social-cover.svg`, 
 ## Earlier website
 
 The earlier website implementation is preserved on the [`v0` branch](https://github.com/firmvault/website/tree/v0). The current implementation, generated pages, and source scripts are on `main`.
+
+## Approved monthly pricing
+
+The pricing section uses one plan: ₹999/month includes 3 seats and 10GB. Each additional seat costs ₹500/month; each additional 50GB block costs ₹500/month. The calculator is local to the browser, follows the existing theme, and offers an itemized estimate. Four seats with 60GB totals ₹1,999/month. Source: scripts/pricing.mjs, scripts/pricing.css, and scripts/pricing.js.
+
