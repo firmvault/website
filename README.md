@@ -78,5 +78,5 @@ The earlier website implementation is preserved on the [`v0` branch](https://git
 
 ## Approved monthly pricing
 
-The pricing section uses one plan: ₹999/month includes 3 seats and 10GB. Each additional seat costs ₹500/month; each additional 50GB block costs ₹500/month. The calculator is local to the browser, follows the existing theme, and offers an itemized estimate. Four seats with 60GB totals ₹1,999/month. Source: scripts/pricing.mjs, scripts/pricing.css, and scripts/pricing.js.
+The pricing section uses one plan: ₹999/month includes 3 seats and 20GB. Each additional seat costs ₹500/month; each additional 50GB block costs ₹500/month. The calculator is local to the browser, follows the existing theme, and offers an itemized estimate. Four seats with 70GB totals ₹1,999/month. Source: scripts/pricing.mjs, scripts/pricing.css, and scripts/pricing.js.
 

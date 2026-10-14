@@ -5,7 +5,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let seats = 3, storageBlocks = 0, displayed = 999, animation = 0;
   function update() {
-    const storage = 10 + storageBlocks * 50;
+    const storage = 20 + storageBlocks * 50;
     const seatCost = (seats - 3) * 500, storageCost = storageBlocks * 500;
     const total = 999 + seatCost + storageCost;
     root.querySelector('#pv-seats-display').textContent = seats;
