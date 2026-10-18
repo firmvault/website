@@ -24,12 +24,9 @@
   matchMedia('(min-width: 981px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
   $('.back-top')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'instant' : 'smooth' }));
 
-  const progress = $('.scroll-progress');
   const scatter = $('.scatter-scene');
   let ticking = false;
   function onScroll() {
-    const height = document.documentElement.scrollHeight - innerHeight;
-    if (progress) progress.style.transform = `scaleX(${height > 0 ? Math.min(1, Math.max(0, scrollY / height)) : 0})`;
     if (scatter && !reducedMotion.matches) {
       const rect = scatter.getBoundingClientRect();
       if (rect.top < innerHeight && rect.bottom > 0) {
