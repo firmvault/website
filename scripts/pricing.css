@@ -31,3 +31,47 @@
 @media(max-width:520px){#pricing .pv-intro h2{font-size:clamp(38px,10.5vw,51px)}#pricing .pv-plan-top h3{font-size:25px}#pricing .pv-total-price{justify-content:flex-start}#pricing .pv-estimate{align-items:flex-start}#pricing .pv-calculator-heading h3{font-size:26px}}
 @media(max-width:360px){#pricing .pv-calculator-heading h3{font-size:24px}#pricing .pv-plan-top h3{font-size:23px}}
 @media(prefers-reduced-motion:reduce){#pricing *,#pricing *:before,#pricing *:after{transition:none!important;animation:none!important}}
+
+/* Monthly totals and billing policies use the same approved price model. */
+#pricing .pv-tax-note{font-size:14px;line-height:1.5;color:var(--muted);margin-top:9px}
+#pricing .pv-estimate-tax{text-align:right;margin-top:8px}
+.pv-billing-guide{margin-top:36px;padding:32px;border:1px solid var(--border);background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 3%,var(--surface)),var(--surface) 55%);box-shadow:inset 0 1px 0 var(--surface-sheen)}
+.pv-billing-heading{display:flex;align-items:start;justify-content:space-between;gap:32px}
+.pv-billing-heading h3{font-size:29px;line-height:1.2;letter-spacing:-.035em}
+.pv-billing-heading>p{font-size:16px;line-height:1.6;color:var(--muted);max-width:440px}
+.pv-billing-rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 36px;margin:28px 0 0}
+.pv-billing-rules>div{min-width:0;border-top:1px solid var(--border);padding-top:18px}
+.pv-billing-rules dt{font:500 21px/1.3 'Space Grotesk',sans-serif;letter-spacing:-.025em}
+.pv-billing-rules dd{font-size:16px;line-height:1.65;color:var(--muted);margin:10px 0 0;max-width:470px}
+.pv-proration-example{border-top:1px solid var(--border);margin-top:28px}
+.pv-proration-example>summary{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:56px;padding-top:12px;font-size:16px;font-weight:600;list-style:none;cursor:pointer}
+.pv-proration-example>summary::-webkit-details-marker{display:none}
+.pv-billing-plus{width:16px;height:16px;position:relative;flex:none;color:var(--accent)}
+.pv-billing-plus:before,.pv-billing-plus:after{content:'';position:absolute;background:currentColor;inset:7px 0 auto;height:1.5px}
+.pv-billing-plus:after{transform:rotate(90deg);transition:transform .2s ease}
+.pv-proration-example[open] .pv-billing-plus:after{transform:rotate(0)}
+.pv-proration-content{padding-top:16px}
+.pv-proration-content>p{font-size:16px;line-height:1.65;color:var(--muted);max-width:760px}
+.pv-proration-content>p strong{font-weight:600;color:var(--text)}
+.pv-proration-amounts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-block:24px}
+.pv-proration-amounts>div{border-left:2px solid var(--accent);padding:4px 0 4px 20px;min-width:0}
+.pv-proration-amounts span{font-size:15px;line-height:1.5;color:var(--muted);display:block}
+.pv-proration-amounts strong{display:block;margin-top:9px;font:500 34px/1.2 'Space Grotesk',sans-serif;letter-spacing:-.035em;color:var(--accent);font-variant-numeric:tabular-nums}
+.pv-proration-amounts small{font:400 15px/1.5 'Source Sans 3',sans-serif;letter-spacing:0;color:var(--muted)}
+.pv-proration-amounts p{font-size:15px;line-height:1.5;color:var(--muted);margin-top:8px}
+.pv-proration-content>.pv-proration-note{font-size:14px;max-width:none}
+@media(max-width:860px){
+  .pv-billing-guide{max-width:620px;margin-inline:auto;padding:30px}
+  .pv-billing-heading{display:block}
+  .pv-billing-heading>p{max-width:none;margin-top:14px}
+}
+@media(max-width:600px){
+  .pv-billing-guide{margin-top:28px;padding:24px 21px}
+  .pv-billing-heading h3{font-size:27px}
+  .pv-billing-rules{grid-template-columns:minmax(0,1fr);gap:24px;margin-top:24px}
+  .pv-billing-rules dt{font-size:22px}
+  .pv-billing-rules dd{font-size:16px;margin-top:8px}
+  .pv-proration-example>summary{font-size:16px;line-height:1.5}
+  .pv-proration-amounts{grid-template-columns:minmax(0,1fr);gap:24px}
+}
+@media(max-width:520px){#pricing .pv-estimate-tax{text-align:left}}

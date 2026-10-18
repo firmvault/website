@@ -831,3 +831,140 @@ html[data-theme="dark"] #fv-hero .ha-brand-image{filter:invert(1)}
 @media(max-width:520px){#pricing .pv-intro h2{font-size:clamp(38px,10.5vw,51px)}#pricing .pv-plan-top h3{font-size:25px}#pricing .pv-total-price{justify-content:flex-start}#pricing .pv-estimate{align-items:flex-start}#pricing .pv-calculator-heading h3{font-size:26px}}
 @media(max-width:360px){#pricing .pv-calculator-heading h3{font-size:24px}#pricing .pv-plan-top h3{font-size:23px}}
 @media(prefers-reduced-motion:reduce){#pricing *,#pricing *:before,#pricing *:after{transition:none!important;animation:none!important}}
+
+/* Monthly totals and billing policies use the same approved price model. */
+#pricing .pv-tax-note{font-size:14px;line-height:1.5;color:var(--muted);margin-top:9px}
+#pricing .pv-estimate-tax{text-align:right;margin-top:8px}
+.pv-billing-guide{margin-top:36px;padding:32px;border:1px solid var(--border);background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 3%,var(--surface)),var(--surface) 55%);box-shadow:inset 0 1px 0 var(--surface-sheen)}
+.pv-billing-heading{display:flex;align-items:start;justify-content:space-between;gap:32px}
+.pv-billing-heading h3{font-size:29px;line-height:1.2;letter-spacing:-.035em}
+.pv-billing-heading>p{font-size:16px;line-height:1.6;color:var(--muted);max-width:440px}
+.pv-billing-rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 36px;margin:28px 0 0}
+.pv-billing-rules>div{min-width:0;border-top:1px solid var(--border);padding-top:18px}
+.pv-billing-rules dt{font:500 21px/1.3 'Space Grotesk',sans-serif;letter-spacing:-.025em}
+.pv-billing-rules dd{font-size:16px;line-height:1.65;color:var(--muted);margin:10px 0 0;max-width:470px}
+.pv-proration-example{border-top:1px solid var(--border);margin-top:28px}
+.pv-proration-example>summary{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:56px;padding-top:12px;font-size:16px;font-weight:600;list-style:none;cursor:pointer}
+.pv-proration-example>summary::-webkit-details-marker{display:none}
+.pv-billing-plus{width:16px;height:16px;position:relative;flex:none;color:var(--accent)}
+.pv-billing-plus:before,.pv-billing-plus:after{content:'';position:absolute;background:currentColor;inset:7px 0 auto;height:1.5px}
+.pv-billing-plus:after{transform:rotate(90deg);transition:transform .2s ease}
+.pv-proration-example[open] .pv-billing-plus:after{transform:rotate(0)}
+.pv-proration-content{padding-top:16px}
+.pv-proration-content>p{font-size:16px;line-height:1.65;color:var(--muted);max-width:760px}
+.pv-proration-content>p strong{font-weight:600;color:var(--text)}
+.pv-proration-amounts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-block:24px}
+.pv-proration-amounts>div{border-left:2px solid var(--accent);padding:4px 0 4px 20px;min-width:0}
+.pv-proration-amounts span{font-size:15px;line-height:1.5;color:var(--muted);display:block}
+.pv-proration-amounts strong{display:block;margin-top:9px;font:500 34px/1.2 'Space Grotesk',sans-serif;letter-spacing:-.035em;color:var(--accent);font-variant-numeric:tabular-nums}
+.pv-proration-amounts small{font:400 15px/1.5 'Source Sans 3',sans-serif;letter-spacing:0;color:var(--muted)}
+.pv-proration-amounts p{font-size:15px;line-height:1.5;color:var(--muted);margin-top:8px}
+.pv-proration-content>.pv-proration-note{font-size:14px;max-width:none}
+@media(max-width:860px){
+  .pv-billing-guide{max-width:620px;margin-inline:auto;padding:30px}
+  .pv-billing-heading{display:block}
+  .pv-billing-heading>p{max-width:none;margin-top:14px}
+}
+@media(max-width:600px){
+  .pv-billing-guide{margin-top:28px;padding:24px 21px}
+  .pv-billing-heading h3{font-size:27px}
+  .pv-billing-rules{grid-template-columns:minmax(0,1fr);gap:24px;margin-top:24px}
+  .pv-billing-rules dt{font-size:22px}
+  .pv-billing-rules dd{font-size:16px;margin-top:8px}
+  .pv-proration-example>summary{font-size:16px;line-height:1.5}
+  .pv-proration-amounts{grid-template-columns:minmax(0,1fr);gap:24px}
+}
+@media(max-width:520px){#pricing .pv-estimate-tax{text-align:left}}
+
+/* Concrete controls, presented in the site's existing editorial style. */
+.document-controls-section{border-top:1px solid var(--border);background-image:url('assets/paper-grain.svg');background-size:180px 180px}
+.document-controls-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:start}
+.document-controls-heading h2{font-size:clamp(36px,3.5vw,52px);line-height:1.1;letter-spacing:-.045em}
+.document-controls-heading .section-description{max-width:430px;font-size:18px;line-height:1.65;margin-top:24px}
+.document-controls-link{display:inline-flex;align-items:center;gap:12px;min-height:44px;margin-top:20px;font-size:16px}
+.document-controls-link .icon{width:20px;height:20px;flex:none}
+.document-controls-panel{padding:32px;border:1px solid var(--border);background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 4.5%,var(--surface)),var(--surface) 50%);box-shadow:inset 0 1px 0 var(--surface-sheen),0 20px 46px -26px var(--surface-depth)}
+.document-controls-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 28px;margin:0}
+.document-control{border-top:1px solid var(--border);padding-top:18px;min-width:0}
+.document-control dt{font:500 22px/1.3 'Space Grotesk',sans-serif;letter-spacing:-.025em;color:var(--text)}
+.document-control dd{margin:12px 0 0;font-size:17px;line-height:1.6;color:var(--muted)}
+#about-product .about-context-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+#about-product .about-context-grid>.capability-card:last-child{grid-column:auto}
+.editorial-controls{margin:36px 0}
+.editorial-controls .document-controls-grid{margin-top:24px}
+@media(max-width:980px){
+  .document-controls-layout{grid-template-columns:minmax(0,1fr);gap:32px}
+  .document-controls-heading .section-description{max-width:600px}
+}
+@media(max-width:600px){
+  .document-controls-layout{gap:24px}
+  .document-controls-heading h2{font-size:36px}
+  .document-controls-heading .section-description{font-size:17px;margin-top:18px}
+  .document-controls-link{margin-top:12px}
+  .document-controls-panel{padding:24px 22px}
+  .document-controls-grid{grid-template-columns:minmax(0,1fr);gap:24px}
+  .document-control{padding-top:16px}
+  .document-control dt{font-size:23px}
+  .document-control dd{margin-top:8px;font-size:17px}
+  #about-product .about-context-grid{grid-template-columns:minmax(0,1fr)}
+}
+
+/* A short introduction, a reachable form, and supporting details below it. */
+.booking-grid{grid-template-areas:"intro form" "details form";grid-template-rows:min-content 1fr;column-gap:64px;row-gap:32px}
+.booking-copy{grid-area:intro;min-width:0}
+.booking-panel{grid-area:form;min-width:0;scroll-margin-top:108px}
+.booking-details{grid-area:details;min-width:0}
+.booking-copy .breadcrumb{min-height:44px;margin-bottom:24px}
+.booking-copy .section-description{font-size:19px;line-height:1.6;margin-top:22px}
+.booking-panel>h2{margin-top:0}
+.booking-intro{margin-top:12px}
+.booking-panel form{margin-top:24px}
+.booking-panel .form-row{margin-bottom:20px}
+.booking-panel .form-row label{font-size:15px;line-height:1.5;margin-bottom:8px}
+.booking-panel .form-row input,.booking-panel .form-row select{min-height:50px}
+.booking-panel .form-row input,.booking-panel .form-row select,.booking-panel .form-row textarea{font-size:16px;line-height:1.5;border-radius:4px}
+.booking-panel .form-row input::placeholder,.booking-panel .form-row textarea::placeholder{font-size:15px}
+.booking-panel .form-row .optional{font-size:12px}
+.booking-optional{border-block:1px solid var(--border);margin:4px 0 0}
+.booking-optional>summary{display:flex;align-items:center;gap:10px;min-height:52px;list-style:none;font-size:15px;font-weight:600;cursor:pointer}
+.booking-optional>summary::-webkit-details-marker{display:none}
+.booking-optional>summary .optional{margin-left:auto;color:var(--muted);font-size:12px;font-weight:400}
+.optional-marker{font-size:22px;font-weight:400;line-height:1;color:var(--accent);transition:transform .2s ease}
+.booking-optional[open] .optional-marker{transform:rotate(45deg)}
+.booking-optional-fields{padding:8px 0 2px}
+.booking-panel .form-disclosure{font-size:14px;line-height:1.6;margin-top:20px;overflow-wrap:anywhere}
+.booking-panel .form-submit{min-height:52px;margin-top:18px;font-size:16px}
+.booking-panel .form-privacy{font-size:13px;line-height:1.65;margin-top:14px}
+.booking-panel .form-privacy a{display:inline-flex;align-items:center;min-height:44px}
+.booking-panel .email-fallback textarea{font-size:16px;line-height:1.5}
+.booking-panel .email-fallback button{min-height:48px}
+.booking-details .demo-agenda{margin-top:0;padding-top:24px}
+.booking-details .demo-agenda>h2{font-size:23px;line-height:1.3;margin-bottom:12px;letter-spacing:-.025em}
+.booking-details .demo-agenda>div{line-height:1.6;padding-block:16px}
+.booking-details .demo-agenda>div>span{font-size:12px}
+.booking-contact a{min-height:44px;overflow-wrap:anywhere}
+@media(max-width:1100px){.booking-grid{column-gap:40px}}
+@media(max-width:900px){
+  .booking-main{padding-block:32px 72px}
+  .booking-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "form" "details";grid-template-rows:auto;gap:28px;max-width:640px}
+  .booking-copy .breadcrumb{margin-bottom:14px}
+  .booking-copy h1{font-size:clamp(36px,5.5vw,48px)}
+  .booking-copy .section-description{font-size:18px;margin-top:16px}
+  .booking-panel{max-width:none;width:100%}
+  .booking-details{margin-top:8px}
+}
+@media(max-width:600px){
+  .booking-main{padding-block:18px 64px}
+  .booking-grid{gap:24px}
+  .booking-copy .breadcrumb{font-size:14px;margin-bottom:10px}
+  .booking-copy h1{font-size:clamp(33px,8.8vw,42px);line-height:1.12}
+  .booking-copy .section-description{font-size:17px;line-height:1.55;margin-top:14px}
+  .booking-panel{padding:24px 20px;scroll-margin-top:92px}
+  .booking-panel>h2{font-size:28px;line-height:1.2}
+  .booking-intro{font-size:16px;line-height:1.5;margin-top:10px}
+  .booking-panel form{margin-top:22px}
+  .booking-panel .form-row{margin-bottom:18px}
+  .booking-optional>summary{font-size:14px;gap:8px}
+  .booking-details .demo-agenda>h2{font-size:24px}
+}
+@media(prefers-reduced-motion:reduce){.optional-marker{transition:none}}

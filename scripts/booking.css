@@ -1,0 +1,59 @@
+/* A short introduction, a reachable form, and supporting details below it. */
+.booking-grid{grid-template-areas:"intro form" "details form";grid-template-rows:min-content 1fr;column-gap:64px;row-gap:32px}
+.booking-copy{grid-area:intro;min-width:0}
+.booking-panel{grid-area:form;min-width:0;scroll-margin-top:108px}
+.booking-details{grid-area:details;min-width:0}
+.booking-copy .breadcrumb{min-height:44px;margin-bottom:24px}
+.booking-copy .section-description{font-size:19px;line-height:1.6;margin-top:22px}
+.booking-panel>h2{margin-top:0}
+.booking-intro{margin-top:12px}
+.booking-panel form{margin-top:24px}
+.booking-panel .form-row{margin-bottom:20px}
+.booking-panel .form-row label{font-size:15px;line-height:1.5;margin-bottom:8px}
+.booking-panel .form-row input,.booking-panel .form-row select{min-height:50px}
+.booking-panel .form-row input,.booking-panel .form-row select,.booking-panel .form-row textarea{font-size:16px;line-height:1.5;border-radius:4px}
+.booking-panel .form-row input::placeholder,.booking-panel .form-row textarea::placeholder{font-size:15px}
+.booking-panel .form-row .optional{font-size:12px}
+.booking-optional{border-block:1px solid var(--border);margin:4px 0 0}
+.booking-optional>summary{display:flex;align-items:center;gap:10px;min-height:52px;list-style:none;font-size:15px;font-weight:600;cursor:pointer}
+.booking-optional>summary::-webkit-details-marker{display:none}
+.booking-optional>summary .optional{margin-left:auto;color:var(--muted);font-size:12px;font-weight:400}
+.optional-marker{font-size:22px;font-weight:400;line-height:1;color:var(--accent);transition:transform .2s ease}
+.booking-optional[open] .optional-marker{transform:rotate(45deg)}
+.booking-optional-fields{padding:8px 0 2px}
+.booking-panel .form-disclosure{font-size:14px;line-height:1.6;margin-top:20px;overflow-wrap:anywhere}
+.booking-panel .form-submit{min-height:52px;margin-top:18px;font-size:16px}
+.booking-panel .form-privacy{font-size:13px;line-height:1.65;margin-top:14px}
+.booking-panel .form-privacy a{display:inline-flex;align-items:center;min-height:44px}
+.booking-panel .email-fallback textarea{font-size:16px;line-height:1.5}
+.booking-panel .email-fallback button{min-height:48px}
+.booking-details .demo-agenda{margin-top:0;padding-top:24px}
+.booking-details .demo-agenda>h2{font-size:23px;line-height:1.3;margin-bottom:12px;letter-spacing:-.025em}
+.booking-details .demo-agenda>div{line-height:1.6;padding-block:16px}
+.booking-details .demo-agenda>div>span{font-size:12px}
+.booking-contact a{min-height:44px;overflow-wrap:anywhere}
+@media(max-width:1100px){.booking-grid{column-gap:40px}}
+@media(max-width:900px){
+  .booking-main{padding-block:32px 72px}
+  .booking-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "form" "details";grid-template-rows:auto;gap:28px;max-width:640px}
+  .booking-copy .breadcrumb{margin-bottom:14px}
+  .booking-copy h1{font-size:clamp(36px,5.5vw,48px)}
+  .booking-copy .section-description{font-size:18px;margin-top:16px}
+  .booking-panel{max-width:none;width:100%}
+  .booking-details{margin-top:8px}
+}
+@media(max-width:600px){
+  .booking-main{padding-block:18px 64px}
+  .booking-grid{gap:24px}
+  .booking-copy .breadcrumb{font-size:14px;margin-bottom:10px}
+  .booking-copy h1{font-size:clamp(33px,8.8vw,42px);line-height:1.12}
+  .booking-copy .section-description{font-size:17px;line-height:1.55;margin-top:14px}
+  .booking-panel{padding:24px 20px;scroll-margin-top:92px}
+  .booking-panel>h2{font-size:28px;line-height:1.2}
+  .booking-intro{font-size:16px;line-height:1.5;margin-top:10px}
+  .booking-panel form{margin-top:22px}
+  .booking-panel .form-row{margin-bottom:18px}
+  .booking-optional>summary{font-size:14px;gap:8px}
+  .booking-details .demo-agenda>h2{font-size:24px}
+}
+@media(prefers-reduced-motion:reduce){.optional-marker{transition:none}}

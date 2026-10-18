@@ -20,7 +20,7 @@
     root.querySelector('[data-change="seats:1"]').disabled = seats >= 999;
     root.querySelector('[data-change="storage:1"]').disabled = storageBlocks >= 999;
     root.querySelector('#pv-reset').disabled = seats === 3 && storageBlocks === 0;
-    root.querySelector('#pv-calculation-status').textContent = `${money(total)} per month for ${seats} seats and ${storage}GB storage.`;
+    root.querySelector('#pv-calculation-status').textContent = `${money(total)} per month including GST for ${seats} seats and ${storage}GB storage. This is the full monthly price.`;
     cancelAnimationFrame(animation);
     const from = displayed, started = performance.now();
     function tick(now) {
