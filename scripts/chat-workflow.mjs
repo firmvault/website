@@ -26,7 +26,7 @@ function messages(items, timestamp) {
 export function renderChatWorkflow(icon, arrow) {
   return `<section class="chat-workflow" id="how-it-works" aria-labelledby="workflow-heading">
   <div class="container">
-    <div class="workflow-intro reveal"><p class="eyebrow"><span class="section-number">02</span> FROM RECEIVED TO RETRIEVED</p><h2 id="workflow-heading">From chat to vault<br><span class="muted-heading">in four moves.</span></h2><p class="section-description">Forward, file, organise and retrieve.<br>Follow one document through your firm’s WhatsApp workflow.</p></div>
+    <div class="workflow-intro reveal"><p class="eyebrow">FROM RECEIVED TO RETRIEVED</p><h2 id="workflow-heading">From chat to vault<br><span class="muted-heading">in four moves.</span></h2><p class="section-description">Forward, file, organise and retrieve.<br>Follow one document through your firm’s WhatsApp workflow.</p></div>
     <div class="chat-scroll-track">
       <div class="chat-scroll-stage">
         <div class="chat-story" aria-label="Document workflow">

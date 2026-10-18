@@ -89,12 +89,13 @@
   function start() { if (playing && visible && !document.hidden && !frame) frame = requestAnimationFrame(animate); }
   function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; last = 0; }
   function controls() {
+    if (!pause) return;
     pause.hidden = reduced.matches;
     pause.setAttribute('aria-pressed', String(!playing));
     pause.setAttribute('aria-label', playing ? 'Pause hero animation' : 'Play hero animation');
     pause.textContent = playing ? 'Pause motion' : 'Play motion';
   }
-  pause.addEventListener('click', () => { playing = !playing; controls(); if (playing) start(); else stop(); });
+  pause?.addEventListener('click', () => { playing = !playing; controls(); if (playing) start(); else stop(); });
   reduced.addEventListener('change', () => {
     stop(); playing = !reduced.matches; controls();
     if (reduced.matches) draw(13); else { elapsed = 800; draw(.8); start(); }
