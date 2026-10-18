@@ -21,7 +21,7 @@ export function renderBooking(icon, arrow) {
           <div class="form-row"><label for="demo-message">What would you like to improve? <span class="optional">Optional</span></label><textarea id="demo-message" name="message" rows="3" maxlength="1500" placeholder="Tell us about your document workflow…"></textarea></div>
         </div>
       </details>
-      <p class="form-disclosure" id="demo-email-help">Opens your email app with a prepared enquiry to contact@nexosk.in. You review and send it to arrange a time.</p>
+      <p class="form-disclosure" id="demo-email-help">This opens your email app with a prepared enquiry to contact@nexosk.in. You review and send it to arrange a time.</p>
       <button class="button form-submit" type="submit">Prepare demo email ${arrow}</button>
       <p class="form-privacy">Please keep client documents out of your enquiry.<br><a href="/privacy/">How we handle your details</a></p>
     </form>
