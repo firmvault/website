@@ -9,12 +9,13 @@
   const transferGradient = find('#fv-transfer-gradient');
   const messages = [...flow.children].map(node => ({node, at: Number(node.dataset.at), camera: 0}));
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const compact = matchMedia('(max-width: 600px)');
   let playing = !reduced.matches, visible = false, elapsed = 800, last = 0, frame = 0, points;
   const ease = value => { const x = Math.max(0, Math.min(1, value)); return x * x * (3 - 2 * x); };
 
   function measure() {
     messages.forEach(message => {
-      message.camera = Math.max(0, message.node.offsetTop + message.node.offsetHeight - (body.clientHeight - 35));
+      message.camera = Math.max(0, message.node.offsetTop + message.node.offsetHeight - (body.clientHeight - (compact.matches ? 20 : 35)));
     });
     // Use layout coordinates, so floating transforms cannot change the path.
     const stacked = getComputedStyle(wa).position !== 'absolute';
@@ -24,7 +25,7 @@
     const end = stacked
       ? {x: dash.offsetLeft + dash.offsetWidth / 2, y: dash.offsetTop + 1}
       : {x: dash.offsetLeft + dash.offsetWidth - 24, y: dash.offsetTop + 83};
-    points = {start, end, stacked,
+    points = {start, end, stacked, packetHalfWidth: packet.offsetWidth / 2, packetHalfHeight: packet.offsetHeight / 2,
       one: stacked ? {x: start.x, y: start.y + 20} : {x: start.x + 115, y: start.y + 5},
       two: stacked ? {x: end.x, y: end.y - 20} : {x: end.x + 12, y: end.y - 60}};
     // Keep the approved curved connection inside the hero on narrow desktop columns.
@@ -61,7 +62,7 @@
     if (state.textContent !== label) state.textContent = label;
     const caption = t < 3.6 ? 'Forward a document on WhatsApp' : t < 8.8 ? 'Organised in your FirmVault dashboard' : t < 12.2 ? 'Ask for it on WhatsApp' : 'Get the same PDF back on WhatsApp';
     if (scene.textContent !== caption) scene.textContent = caption;
-    const drift = reduced.matches ? 0 : Math.sin(t * .75) * 2.6;
+    const drift = reduced.matches ? 0 : Math.sin(t * .75) * (compact.matches ? 1.25 : 2.6);
     wa.style.transform = `translateY(${drift}px) rotate(${points?.stacked || reduced.matches ? 0 : -1.1}deg)`;
     dash.style.transform = `translateY(${-drift*.6}px) rotate(${points?.stacked || reduced.matches ? 0 : .8}deg)`;
     let trip = -1, reverse = false;
@@ -75,7 +76,7 @@
       const colourProgress = Math.max(0, Math.min(1, ((pos.x - points.start.x) * dx + (pos.y - points.start.y) * dy) / (dx * dx + dy * dy || 1)));
       packet.style.setProperty('--ha-transfer-progress', `${(colourProgress * 100).toFixed(2)}%`);
       packet.style.opacity = Math.min(1, trip * 6, (1-trip) * 6);
-      packet.style.transform = `translate(${pos.x-23.5}px,${pos.y-17}px) scale(.9)`;
+      packet.style.transform = `translate(${pos.x-points.packetHalfWidth}px,${pos.y-points.packetHalfHeight}px) scale(.9)`;
     } else packet.style.opacity = 0;
   }
   function animate(stamp) {

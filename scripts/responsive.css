@@ -196,3 +196,48 @@
   .film-screen.is-following{cursor:auto}
   .film-screen.is-following .film-play{left:50%;top:auto;bottom:5%;transform:translateX(-50%);pointer-events:auto;will-change:auto}
 }
+
+/* Compact phone hero: keep intake and the filed record together. */
+@media(max-width:600px){
+  #fv-hero .hero-grid{gap:0;padding:24px 0 22px;align-items:start}
+  #fv-hero .hero-copy{display:contents}
+  #fv-hero .hero-copy>.hero-eyebrow{order:0;margin-bottom:20px}
+  #fv-hero .hero-copy>h1{order:1}
+  #fv-hero .hero-copy>.hero-description{order:2;margin-top:14px}
+  #fv-hero .hero-copy>.hero-actions{order:3;margin-top:16px;gap:10px 12px;align-items:center}
+  #fv-hero .hero-actions .hero-primary{font-size:14px;min-height:48px;padding:12px;gap:8px}
+  #fv-hero .hero-actions>a{font-size:14px;gap:7px}
+  #fv-hero .hero-actions .icon{width:18px;height:18px;flex:none}
+  #fv-hero .hero-visual{order:4;width:100%;max-width:440px;margin:22px auto 0}
+  #fv-hero .hero-copy>.hero-audience{order:5;margin:14px 0 0;font-size:13px;line-height:1.5}
+  #fv-hero .ha-art{display:flex;flex-direction:column;height:auto;gap:32px}
+  #fv-hero .ha-wa-wrap,#fv-hero .ha-dashboard-wrap{position:relative;inset:auto;width:100%;max-width:none}
+  #fv-hero .ha-platform{font-size:11px;line-height:18px;gap:7px;margin-bottom:8px}
+  #fv-hero .ha-platform .ha-whatsapp-logo{width:18px;height:18px}
+  #fv-hero .ha-wa{height:196px}
+  #fv-hero .ha-wa-head{min-height:48px;padding:8px 12px;gap:9px}
+  #fv-hero .ha-avatar{width:30px;height:30px}
+  #fv-hero .ha-avatar img{width:20px;height:22px}
+  #fv-hero .ha-wa-head strong{font-size:18px}
+  #fv-hero .ha-wa-head small{display:none}
+  #fv-hero .ha-flow{top:10px;left:10px;right:10px;gap:7px}
+  #fv-hero .ha-msg{font-size:14px;line-height:1.35;padding:8px 9px 6px}
+  #fv-hero .ha-time,#fv-hero .ha-forwarded,#fv-hero .ha-file em,#fv-hero .ha-msg>small{display:none}
+  #fv-hero .ha-file{padding:6px;gap:8px}
+  #fv-hero .ha-file strong{font-size:14px;line-height:1.3}
+  #fv-hero .ha-pdf{width:26px;height:32px;font-size:9px}
+  #fv-hero .ha-composer{min-height:32px;padding:4px 12px;gap:8px;font-size:12px}
+  #fv-hero .ha-send{width:23px;height:23px;font-size:17px}
+  #fv-hero .ha-dash-head{min-height:33px;padding:7px 11px}
+  #fv-hero .ha-dash-title{font-size:12px;gap:7px}
+  #fv-hero .ha-dash-title img{width:14px;height:16px}
+  #fv-hero .ha-dash-tag,#fv-hero .ha-dash-content h3,#fv-hero .ha-search,#fv-hero .ha-dash-context{display:none}
+  #fv-hero .ha-dash-content{padding:10px}
+  #fv-hero .ha-dash-row{grid-template-columns:26px minmax(0,1fr) auto;gap:8px;padding:7px;align-items:center}
+  #fv-hero .ha-dash-row>.ha-pdf{grid-row:auto;width:26px;height:32px}
+  #fv-hero .ha-dash-row strong{font-size:14px;line-height:1.3}
+  #fv-hero .ha-dash-row small{font-size:12px;line-height:1.3;margin-top:3px}
+  #fv-hero .ha-file-state{grid-column:auto;margin-left:0;font-size:11px}
+  #fv-hero .ha-packet{width:36px;height:24px;font-size:10px}
+  #fv-hero .ha-footer{margin-top:10px;font-size:12px;line-height:1.5}
+}
