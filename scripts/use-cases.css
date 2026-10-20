@@ -1,0 +1,28 @@
+/* Three equally weighted situations for the existing document workflow. */
+#for-your-firm .use-case-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+#for-your-firm .use-case-card:last-child{grid-column:auto}
+#for-your-firm .use-case-card>.icon{width:28px;height:28px;margin-bottom:24px}
+.use-case-copy{min-width:0}
+#for-your-firm .use-case-copy h3{font-size:27px;line-height:1.25;letter-spacing:-.035em}
+#for-your-firm .use-case-copy p{font-size:18px;line-height:1.65;margin-top:16px;max-width:36ch}
+@media(min-width:981px) and (max-width:1100px){
+  #for-your-firm .use-case-copy h3{font-size:25px}
+  #for-your-firm .use-case-copy p{font-size:17px}
+}
+@media(max-width:980px){
+  #for-your-firm .use-case-grid{grid-template-columns:minmax(0,1fr);gap:16px}
+  #for-your-firm .use-case-card{display:grid;grid-template-columns:28px minmax(0,1fr);gap:20px;align-items:start}
+  #for-your-firm .use-case-card>.icon{margin:3px 0 0}
+  #for-your-firm .use-case-copy h3{font-size:25px}
+  #for-your-firm .use-case-copy p{font-size:17px;line-height:1.6;margin-top:10px;max-width:64ch}
+}
+@media(max-width:600px){
+  #for-your-firm .structure-header{margin-bottom:28px}
+  #for-your-firm .use-case-card{grid-template-columns:24px minmax(0,1fr);gap:16px;padding:24px 20px}
+  #for-your-firm .use-case-card>.icon{width:24px;height:24px}
+  #for-your-firm .use-case-copy h3{font-size:23px}
+}
+@media(max-width:360px){
+  #for-your-firm .use-case-card{padding:22px 16px;gap:12px}
+  #for-your-firm .use-case-copy h3{font-size:22px}
+}

@@ -2,7 +2,12 @@
 export { pricingSection } from './pricing.mjs';
 
 export function capabilitiesSection(icon) {
-  return `<section class="capabilities-section section-space"><div class="container"><div class="structure-header reveal"><p class="eyebrow">FOR YOUR KIND OF WORK</p><h2>Built for the way<br><span class="muted-heading">your firm works.</span></h2></div><div class="capability-grid"><article class="capability-card reveal">${icon('folder')}<h3>CA and tax firms</h3><ul><li>GST, ITR and audit collections</li><li>Bank statements and KYC</li><li>Client-wise document vault</li></ul></article><article class="capability-card reveal">${icon('file')}<h3>Law firms</h3><ul><li>Agreements, notices, evidence</li><li>Matter-wise vault</li><li>Team-based permissions</li></ul></article><article class="capability-card reveal">${icon('check')}<h3>Document controls</h3><ul><li>Firm-owned storage</li><li>Access by group and client</li><li>Audit trail of recorded activity</li></ul></article></div></div></section>`;
+  const cases = [
+    {icon:'chat', title:'Client onboarding', copy:'Forward ID records and agreements from WhatsApp. File each document under the right client, ready for the work ahead.'},
+    {icon:'folder', title:'Recurring client work', copy:'Keep returns, statements and reports organised by client, service, document type and period.'},
+    {icon:'search', title:'Client requests', copy:'Ask for a document on WhatsApp and retrieve the same file when a client or colleague needs it.'}
+  ];
+  return `<section class="capabilities-section section-space use-cases-section" aria-labelledby="use-cases-title"><div class="container"><div class="structure-header reveal"><p class="eyebrow">EVERYDAY USE CASES</p><h2 id="use-cases-title">Built for the way<br><span class="muted-heading">your firm works.</span></h2></div><div class="capability-grid use-case-grid">${cases.map(item=>`<article class="capability-card use-case-card reveal">${icon(item.icon)}<div class="use-case-copy"><h3>${item.title}</h3><p>${item.copy}</p></div></article>`).join('')}</div></div></section>`;
 }
 
 export function aboutSection(icon) {
