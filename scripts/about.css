@@ -1,0 +1,54 @@
+/* Company identity and useful product scope, in the existing editorial system. */
+.about-company-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:80px;align-items:center}
+.about-company-intro h2{font-size:clamp(36px,3.8vw,54px);line-height:1.1;letter-spacing:-.045em}
+.about-company-intro .section-description{max-width:500px;font-size:18px;line-height:1.65;margin-top:24px}
+.about-company-more{display:inline-flex;align-items:center;gap:12px;min-height:44px;margin-top:24px;font-size:16px}
+.about-company-more .icon,.about-company-email .icon{width:20px;height:20px;flex:none}
+.about-company-panel{min-width:0;padding:36px;border:1px solid var(--frame-border);border-radius:var(--frame-radius);background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 4%,var(--surface)),var(--surface) 55%);box-shadow:var(--frame-shadow)}
+.about-company-label{font-size:14px;line-height:1.5;color:var(--muted);margin-bottom:14px}
+.about-company-panel h2,.about-company-panel h3{font-size:30px;line-height:1.25;letter-spacing:-.035em;max-width:16ch}
+.about-company-facts{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:28px 0 20px;padding-top:24px;border-top:1px solid var(--border)}
+.about-company-facts dt{font-size:14px;line-height:1.5;color:var(--muted)}
+.about-company-facts dd{font-size:18px;line-height:1.5;margin:6px 0 0}
+.about-company-email{display:flex;align-items:center;gap:12px;width:fit-content;max-width:100%;min-height:44px;font-size:16px;overflow-wrap:anywhere}
+.about-company-email:hover,.about-company-more:hover{color:var(--accent)}
+.about-page>.container{max-width:1140px}
+.about-page-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:64px;align-items:center}
+.about-page-intro h1{font-size:clamp(48px,5.6vw,80px);line-height:1.08;letter-spacing:-.05em}
+.about-page-lead{max-width:560px;font-size:22px;line-height:1.65;color:var(--muted);margin-top:28px}
+.about-page-content{max-width:850px;margin-top:80px}
+.about-page-section{padding-top:40px;border-top:1px solid var(--border)}
+.about-page-section+.about-page-section{margin-top:48px}
+.about-page-section h2{font-size:30px;line-height:1.25;letter-spacing:-.035em}
+.about-page-section>p{font-size:18px;line-height:1.7;color:var(--muted);margin-top:18px;max-width:720px}
+.about-scope-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px;margin-top:30px}
+.about-scope-list dt{font:500 22px/1.3 'Space Grotesk',sans-serif;letter-spacing:-.025em}
+.about-scope-list dd{font-size:17px;line-height:1.65;color:var(--muted);margin:12px 0 0}
+.about-page-section .document-controls-grid{margin-top:30px}
+.about-page-demo .button{margin-top:24px}
+@media(max-width:980px){
+  .about-company-layout{gap:36px}
+  .about-company-panel{padding:28px}
+  .about-company-panel h2,.about-company-panel h3{font-size:27px}
+  .about-page-intro{grid-template-columns:minmax(0,1fr);gap:36px}
+  .about-page-intro .about-company-panel{max-width:560px;width:100%}
+  .about-page-content{margin-top:56px}
+}
+@media(max-width:700px){
+  .about-company-layout{grid-template-columns:minmax(0,1fr);gap:28px}
+  .about-company-intro h2{font-size:36px}
+  .about-company-intro .section-description{font-size:17px;margin-top:20px}
+  .about-company-more{margin-top:16px}
+  .about-company-panel{padding:26px 22px}
+  .about-company-panel h2,.about-company-panel h3{font-size:28px}
+  .about-company-facts{gap:20px;margin-top:24px;padding-top:20px}
+  .about-company-facts dd{font-size:17px}
+  .about-page-intro h1{font-size:clamp(44px,10vw,64px)}
+  .about-page-lead{font-size:19px;line-height:1.65;margin-top:24px}
+  .about-page-section{padding-top:30px}
+  .about-page-section h2{font-size:27px}
+  .about-page-section>p{font-size:17px;line-height:1.65}
+  .about-page-section+.about-page-section{margin-top:36px}
+  .about-scope-list{grid-template-columns:minmax(0,1fr);gap:24px;margin-top:26px}
+  .about-scope-list dd{margin-top:8px}
+}
