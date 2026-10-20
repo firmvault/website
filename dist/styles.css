@@ -1133,6 +1133,19 @@ html[data-theme="dark"] #fv-hero .ha-brand-image{filter:invert(1)}
   #for-your-firm .use-case-copy h3{font-size:22px}
 }
 
+/* One film presentation across desktop, tablet and phone. */
+@media(max-width:1024px){
+  .film-section .film-screen{aspect-ratio:16/9}
+  .film-section .film-screen video{object-fit:contain}
+  .film-section .film-play{min-height:48px;padding:8px 16px 8px 8px;gap:9px}
+  .film-section .film-play-icon{width:30px;height:30px}
+  .film-section .film-play strong{font-size:14px}
+  .film-section .film-preview-toggle{min-height:44px;font-size:11px}
+  .film-section .film-duration{font-size:10px}
+}
+/* Native fullscreen controls remain available after Play with sound. */
+.film-screen video:fullscreen{width:100vw;height:100vh;max-width:none;max-height:none;object-fit:contain;background:#000}
+
 /* Company identity and useful product scope, in the existing editorial system. */
 .about-company-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:80px;align-items:center}
 .about-company-intro h2{font-size:clamp(36px,3.8vw,54px);line-height:1.1;letter-spacing:-.045em}
