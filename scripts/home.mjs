@@ -1,5 +1,6 @@
 import { renderFilm } from './film.mjs';
 import { renderHero } from './hero.mjs';
+import { filingContextSection } from './filing-context.mjs';
 import { renderChatWorkflow } from './chat-workflow.mjs';
 import { documentControlsSection } from './document-controls.mjs';
 import { billingFaq } from './billing.mjs';
@@ -20,7 +21,7 @@ ${renderFilm()}
 
 ${renderChatWorkflow(icon, arrow)}
 
-<section class="structure-section section-space"><div class="container"><div class="structure-header reveal"><p class="eyebrow">THE DETAILS MAKE THE DIFFERENCE</p><h2>A filename is a start.<br><span class="muted-heading">Context makes it useful.</span></h2><p class="section-description">Four filing details connect a document to your firm’s work.</p></div><div class="context-grid"><article class="context-item reveal"><span class="context-number">01 / CLIENT</span><div class="context-illustration client-illustration" aria-hidden="true"><span>AE</span><i></i><span>MC</span><i></i><span>RS</span></div><h3>Who it belongs to.</h3><p>Keep a client’s documents connected to the right client record.</p></article><article class="context-item reveal"><span class="context-number">02 / SERVICE</span><div class="context-illustration service-illustration" aria-hidden="true"><span>GST</span><span>Income tax</span><span>Audit</span></div><h3>What the work is.</h3><p>Give each file the service context your team works with.</p></article><article class="context-item reveal"><span class="context-number">03 / DOCUMENT TYPE</span><div class="context-illustration type-illustration" aria-hidden="true">${icon('file')}<span>Return</span>${icon('file')}<span>Statement</span></div><h3>What the file contains.</h3><p>Distinguish a return, a statement, or another document type.</p></article><article class="context-item reveal"><span class="context-number">04 / PERIOD</span><div class="context-illustration period-illustration" aria-hidden="true"><span>JUL</span><span>AUG</span><span class="selected">SEP</span><span>OCT</span></div><h3>When it’s relevant.</h3><p>Keep the month, quarter, or financial year alongside the record.</p></article></div></div></section>
+${filingContextSection(icon)}
 
 ${quickDemoSection(icon)}
 <div id="for-your-firm">${capabilitiesSection(icon)}</div>

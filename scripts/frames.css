@@ -1,0 +1,47 @@
+/* FirmVault outer frames. WhatsApp, paper documents and controls keep their own shapes. */
+:root{
+  --frame-radius:8px;
+  --frame-border:color-mix(in srgb,var(--text) 6%,var(--border));
+  --frame-contact:color-mix(in srgb,var(--text) 4%,transparent);
+  --frame-shadow:inset 0 1px 0 var(--surface-sheen),0 1px 2px var(--frame-contact),0 16px 32px -26px var(--surface-depth);
+  --frame-shadow-floating:inset 0 1px 0 var(--surface-sheen),0 2px 5px var(--frame-contact),0 24px 48px -28px var(--surface-depth);
+}
+
+.film-shell,
+#fv-hero .ha-dashboard,
+#pricing .pv-base-card,
+#pricing .pv-calculator,
+.pv-billing-guide,
+.document-controls-panel,
+.capability-card,
+.booking-panel{
+  border-radius:var(--frame-radius);
+  border-color:var(--frame-border);
+  box-shadow:var(--frame-shadow);
+}
+
+/* Floating product artwork gets one extra level of depth. */
+#fv-hero .ha-dashboard{box-shadow:var(--frame-shadow-floating)}
+
+/* Retain the plan's blue top edge and the approved square action buttons. */
+#pricing .pv-base-card{border-top-color:var(--accent-fill)}
+
+.film-frame-bar,
+#fv-hero .ha-dash-head{
+  background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 3%,transparent),transparent 85%),var(--surface);
+  border-bottom-color:var(--frame-border);
+  box-shadow:inset 0 1px 0 var(--surface-sheen);
+}
+
+/* Informational cards use the same resting treatment when the pointer passes over them. */
+@media(hover:hover) and (pointer:fine){
+  .capability-card:hover{border-color:var(--frame-border);box-shadow:var(--frame-shadow)}
+}
+
+@media(max-width:600px){
+  :root{
+    --frame-radius:6px;
+    --frame-shadow:inset 0 1px 0 var(--surface-sheen),0 1px 2px var(--frame-contact),0 12px 24px -20px var(--surface-depth);
+    --frame-shadow-floating:inset 0 1px 0 var(--surface-sheen),0 2px 4px var(--frame-contact),0 16px 30px -22px var(--surface-depth);
+  }
+}
